@@ -1,0 +1,21 @@
+= Spring Boot Content Negotiation example
+
+Proof of concept that shows how to use Content-Negotation in Spring Boot
+application.
+
+Content-Negotiation is useful to deal with multiple representations (or views) 
+of the same data returned by the controller. Working out which data format to
+return is called Content Negotiation.
+
+The main benefit of the content negotiation is it avoids duplicated logic.
+
+== Setting up the build environment
+
+Just import this project as "External Maven project" in STS 3.7
+
+== Test
+
+The file _test/tests.txt_ contains cURL based commands you should run manually
+in order to test this application.
+
+
