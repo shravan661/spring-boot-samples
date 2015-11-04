@@ -1,16 +1,23 @@
 package hello;
 
+import javax.validation.constraints.Size;
+
 public class Salutation {
 
-    private String content;
+    @Size(min = 4, max = 20)
+    private String name;
 
     public Salutation() {}
 
     public Salutation(String content) {
-        this.content = content;
+        this.name = content;
     }
 
-    public String getContent() {
-        return content;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

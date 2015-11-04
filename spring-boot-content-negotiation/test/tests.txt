@@ -1,0 +1,17 @@
+
+# RequestParam / ViewResolver
+curl -i -H 'Accept: application/json' http://localhost:8080/salutation
+
+# RequestParam / ViewResolver : Validation Error
+curl -i -H 'Accept: application/json' http://localhost:8080/salutation?name=Ab
+
+# RequestParam / ResponseBody
+curl -i -H 'Accept: application/json' http://localhost:8080/greeting?name=User
+
+# RequestBody / ResponseBody
+curl -i -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"name":"Billy"}' http://localhost:8080/greeting
+
+# Error
+curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"name":"Johny"}' http://localhost:8080/greeting
+
+

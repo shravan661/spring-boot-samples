@@ -29,6 +29,6 @@ public class GreetingController {
     @RequestMapping(value = "/greeting", method = RequestMethod.PUT)
     public Greeting salutation(@RequestBody Salutation s) {
         return new Greeting(counter.incrementAndGet(),
-                            s.getContent());
+                            s.getName());
     }
 }
