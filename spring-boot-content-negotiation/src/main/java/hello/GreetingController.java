@@ -2,6 +2,8 @@ package hello;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +29,7 @@ public class GreetingController {
     }
 
     @RequestMapping(value = "/greeting", method = RequestMethod.PUT)
-    public Greeting salutation(@RequestBody Salutation s) {
+    public Greeting salutation(@Valid @RequestBody Salutation s) {
         return new Greeting(counter.incrementAndGet(),
                             s.getName());
     }
