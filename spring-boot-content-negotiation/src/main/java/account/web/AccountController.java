@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,4 +76,33 @@ class AccountController {
         // Return the view to use for rendering the response
         return "accounts/list";
     }
+    
+    // ------
+
+    /**
+     * METHOD E: RESTful method
+     * TEST: 
+     * curl -i -H 'Accept: application/json' http://localhost:8080/accounts/{number}
+     */
+    @RequestMapping(value="/accounts/{number}", produces="application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody Account accountWithMarshalling(@PathVariable String number) {
+        return accountService.findOne(number);
+    }
+
+    /**
+     * METHOD F: View-based method
+     * TEST: 
+     * curl -i http://localhost:8080/accounts/{number}
+     */
+    @RequestMapping("/accounts/{number}")
+    public String listWithView(Model model, @PathVariable String number) {
+
+        // Call RESTful method to avoid repeating account lookup logic
+        model.addAttribute( accountWithMarshalling(number) );
+
+        // Return the view to use for rendering the response
+        return "accounts/show";
+    }
+
 }
