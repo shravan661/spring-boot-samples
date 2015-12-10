@@ -1,0 +1,100 @@
+= Spring Boot Deployment Strategies examples
+
+Proofs of concept that shows how to deploy Spring Boot applications following
+different strategies.
+
+== embedded-jar
+
+=== Description
+
+This application is based on
+link:spring-boot-content-negotiation[https://github.com/DISID/disid-proofs/tree/master/spring-boot-content-negotiation]
+proof with following features:
+
+* This application doesn't contain any JSP or Thymeleaf view.
+* Uses Spring IO Platform as parent.
+* JAR packaging
+* Spring Boot starter "spring-boot-starter-web" included.
+
+=== Test
+
+Follow these instructions to execute application using embedded tomcat server:
+
+# Generate project distribution using *mvn clean package* command.
+# Execute *java -jar target/account-0.0.1-SNAPSHOT.jar* command.
+# Open browser on *http://localhost:8080*
+# Test *http://localhost:8080/accounts/*.
+
+== jee-war
+
+=== Description
+
+This application is based on
+link:embedded-jar[https://github.com/DISID/disid-proofs/tree/master/spring-boot-deployment-strategies/embedded-jar] proof with some changes
+applied:
+
+* WAR packaging.
+* Tomcat dependency added as _provided_.
+* @SpringBootApplication java class extends *SpringBootServletInitializer*.
+
+=== Test
+
+Follow these instructions to execute application using embedded tomcat server:
+
+# Generate project distribution using *mvn clean package* command.
+# Download
+# link:JBOSS7[http://www.jboss.org/download-manager/file/jboss-eap-7.0.0.Alpha.zip]
+# or link:JBOSS6[http://www.jboss.org/download-manager/file/jboss-eap-6.4.0.GA.zip]
+## Remember that if you use JBOSS 6, you should include *server.servlet-path*
+property with "/*" value on your _application.properties_ file.
+# Deploy your *target/account.war* file on JBOSS.
+# Open browser on *http://localhost:8080*
+# Test *http://localhost:8080/accounts/*.
+
+== embedded-jar-jsp
+
+=== Description
+
+This application is based on
+link:spring-boot-sample-web-jsp[https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-web-jsp]
+project with the following features:
+
+* Shows JSP view on run application
+* Uses Spring IO Platform as parent.
+* JAR packaging
+* Spring Boot starter "spring-boot-starter-web" included.
+* Included *tomcat-embed-jasper* dependency as _provided_
+* Included *jstl* dependency.
+
+=== Test
+
+Follow these instructions to execute application using embedded tomcat server:
+
+# Generate project distribution using *mvn clean package* command.
+# Execute *java -jar target/sample.jsp-0.0.1-BUILD-SNAPSHOT.jar* command.
+# Open browser on *http://localhost:8080* and check that appears *welcome.jsp* view.
+
+== jee-war-jsp
+
+=== Description
+
+This application is based on
+link:embedded-jar-jsp[https://github.com/DISID/disid-proofs/tree/master/spring-boot-deployment-strategies/embedded-jar-jsp] proof with some changes
+applied:
+
+* WAR packaging.
+* Tomcat dependency added as _provided_.
+* @SpringBootApplication java class extends *SpringBootServletInitializer*.
+
+=== Test
+
+Follow these instructions to execute application using embedded tomcat server:
+
+# Generate project distribution using *mvn clean package* command.
+# Download
+# link:JBOSS7[http://www.jboss.org/download-manager/file/jboss-eap-7.0.0.Alpha.zip]
+# or link:JBOSS6[http://www.jboss.org/download-manager/file/jboss-eap-6.4.0.GA.zip]
+## Remember that if you use JBOSS 6, you should include *server.servlet-path*
+property with "/*" value on your _application.properties_ file.
+# Deploy your *target/sample.war* file on JBOSS.
+# Open browser on *http://localhost:8080* and check that appears *welcome.jsp* view.
