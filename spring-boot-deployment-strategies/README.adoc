@@ -8,7 +8,7 @@ different strategies.
 === Description
 
 This application is based on
-link:shttps://github.com/DISID/disid-proofs/tree/master/spring-boot-content-negotiation[spring-boot-content-negotiation]
+link:https://github.com/DISID/disid-proofs/tree/master/spring-boot-content-negotiation[spring-boot-content-negotiation]
 proof with following features:
 
 * This application doesn't contain any JSP or Thymeleaf view.
