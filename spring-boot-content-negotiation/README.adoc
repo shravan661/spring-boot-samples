@@ -15,7 +15,7 @@ Just import this project as "External Maven project" in STS 3.7
 
 == Test
 
-The file _test/tests.txt_ contains cURL based commands you should run manually
-in order to test this application.
+The Javadoc of the Controllers handler methods contains the cURL based 
+commands you should run manually in order to test each handler method.
 
 
