@@ -72,7 +72,8 @@ the application own configuration won't be loaded.
 === Expected results
 
 The attribute `type` of the returned `Account` should have a value
-equal to the value of the property `dummy.type` in the _/tmp/own-config-app_
+equal to the value of the property `dummy.type` in the
+_/tmp/own-config-app/application.properties_
 
 == Case 3
 
