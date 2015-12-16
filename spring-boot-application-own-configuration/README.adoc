@@ -127,7 +127,8 @@ equal to the value of the Java System property `dummy.type`
 
 * In _src/main/resources/application.properties_ set the Servlet 
   context init parameters `dummy.type`.
-  For example `server.context-parameters.dummy.type=type-as-servlet-context-param `
+  For example
+  `server.context-parameters.dummy.type=type-as-servlet-context-param`
 
 === Expected results
 
