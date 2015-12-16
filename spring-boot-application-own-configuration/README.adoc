@@ -49,7 +49,10 @@ equal to the value of the property `dummy.type` in the _src/main/resources/appli
 
 * Property `dummy.type` is in _src/main/resources/application.properties_ 
   and in _/tmp/${spring.application.name}/application.properties_
-  Being ${spring.application.name} the name of the application.
++
+You must include the `spring.application.name` property in the 
+_src/main/resources/application.properties_ and set as value the name of the
+application.
 
 * Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
   indicating the base directory that contains the applications 
@@ -60,8 +63,8 @@ NOTE: The name of the directory outside the application that must
 contain the application configuration is composed following the
 pattern `SPRING_APPLICATION_CONFIG_LOCATION + ${spring.application.name} + "/"`
 
-IMPORTANT: If the application name is not defined the application 
-own configuration won't be loaded.
+IMPORTANT: If the property `spring.application.name` is not defined, 
+the application own configuration won't be loaded.
 
 === Expected results
 
