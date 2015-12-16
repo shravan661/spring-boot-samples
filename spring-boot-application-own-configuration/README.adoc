@@ -38,7 +38,8 @@ This command will return an `Account` instance in JSON format.
 
 == Case 1
 
-Property `dummy.type` is in _src/main/resources/application.properties_ only
+The property `dummy.type` is in _src/main/resources/application.properties_ 
+only.
 
 === Expected results
 
@@ -47,8 +48,10 @@ equal to the value of the property `dummy.type` in the _src/main/resources/appli
 
 == Case 2
 
-* Property `dummy.type` is in _src/main/resources/application.properties_ 
-  and in _/tmp/${spring.application.name}/application.properties_
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration,
+  for example _/tmp/${spring.application.name}/application.properties_
 +
 You must include the `spring.application.name` property in the 
 _src/main/resources/application.properties_ and set as value the name of the
@@ -73,8 +76,9 @@ equal to the value of the property `dummy.type` in the _/tmp/own-config-app_
 
 == Case 3
 
-* Property `dummy.type` is in _src/main/resources/application.properties_ 
-  and in _/tmp/${spring.application.name}/application.properties_
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
 
 * Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
   indicating the base directory that contains the applications 
@@ -89,8 +93,9 @@ equal to the value of the OS env var `DUMMY_TYPE`
 
 == Case 4
 
-* Property `dummy.type` is in _src/main/resources/application.properties_ 
-  and in _/tmp/${spring.application.name}/application.properties_
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
 
 * Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
   indicating the base directory that contains the applications 
@@ -107,8 +112,9 @@ equal to the value of the Java System property `dummy.type`
 
 == Case 5
 
-* Property `dummy.type` is in _src/main/resources/application.properties_ 
-  and in _/tmp/${spring.application.name}/application.properties_
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
 
 * Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
   indicating the base directory that contains the applications 
@@ -129,8 +135,9 @@ equal to the value of the Servlet context parameter `dummy.type`
 
 == Case 6
 
-* Property `dummy.type` is in _src/main/resources/application.properties_ 
-  and in _/tmp/${spring.application.name}/application.properties_
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
 
 * Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
   indicating the base directory that contains the applications 
@@ -152,8 +159,9 @@ equal to the value of the JNDI variable `java:comp/env/DUMMY_TYPE`
 
 == Case 7
 
-* Property `dummy.type` is in _src/main/resources/application.properties_ 
-  and in _/tmp/${spring.application.name}/application.properties_
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
 
 * Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
   indicating the base directory that contains the applications 
@@ -179,8 +187,9 @@ JSON message.
 
 == Case 8
 
-* Property `dummy.type` is in _src/main/resources/application.properties_ 
-  and in _/tmp/${spring.application.name}/application.properties_
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
 
 * Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
   indicating the base directory that contains the applications 
