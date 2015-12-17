@@ -149,23 +149,23 @@ public class ApplicationOwnConfigEnvironmentPostProcessor implements
     private Properties loadProperties(File parent, String filename) {
         if (StringUtils.isEmpty(filename)) {
             logger.error("The given filename is empty.");
-        }
-        if (!parent.isDirectory()) {
+        }else if (!parent.isDirectory()) {
             logger.error("The given parent directory ".concat(
                     parent.getAbsolutePath()).concat(" is not a directory."));
-        }
+        }else {
 
-        File propertyFile = new File(parent, filename);
-        if (propertyFile != null && propertyFile.exists()
-                && propertyFile.isFile()) {
-            FileSystemResource resource = new FileSystemResource(propertyFile);
-            Properties properties;
-            try {
-                properties = PropertiesLoaderUtils.loadProperties(resource);
-                return properties;
-            }
-            catch (IOException ex) {
-                logger.error("Unable to load " + filename, ex);
+            File propertyFile = new File(parent, filename);
+            if (propertyFile != null && propertyFile.exists()
+                    && propertyFile.isFile()) {
+                FileSystemResource resource = new FileSystemResource(propertyFile);
+                Properties properties;
+                try {
+                    properties = PropertiesLoaderUtils.loadProperties(resource);
+                    return properties;
+                }
+                catch (IOException ex) {
+                    logger.error("Unable to load " + filename, ex);
+                }
             }
         }
         return new Properties();
