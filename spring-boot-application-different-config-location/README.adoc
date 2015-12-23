@@ -1,0 +1,57 @@
+= Spring Boot Application with custom config name
+
+Proof of concept that shows the use of _spring.config.*_ properties to
+customize default config location and default config name on and Spring Boot
+application.
+
+Usually, application configuration are defined on `application.properties`
+file using Spring Boot properties, but developers are able to customize this
+location and this name using `spring.config.*` properties.
+
+== Setting up the build environment
+
+. Import this project as "External Maven project" in STS 3.7
+
+== Run Tests
+ 
+[source,shell]
+----
+curl -i -H 'Accept: application/json' http://localhost:8080/accounts?number=1111
+----
+
+This command will return an `Account` instance in JSON format.
+
+== Case 1
+
+The property `dummy.type` is in _src/main/resources/application.properties_ 
+only with value `dummy-type-on-default-location`
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the property `dummy.type` in the _src/main/resources/application.properties_
+
+== Case 2
+
+* The property `dummy.type` is in _src/main/resources/application.properties_
+  with value `dummy-type-on-default-location`
+
+* Set the OS environment variable `SPRING_CONFIG_NAME` with value `custom`.
+  Example: `export SPRING_CONFIG_NAME=custom`
+
+* Creates new properties file in _src/main/resources_ called
+  `custom.properties`
+
+* The property `dummy.type` is in
+  _src/main/resources/custom.properties_ with value
+  `dummy-type-on-custom-config`
+
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the property `dummy.type` in the
+_src/main/resources/custom.properties_ file.
+
+
+
