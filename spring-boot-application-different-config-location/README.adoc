@@ -53,5 +53,31 @@ The attribute `type` of the returned `Account` should have a value
 equal to the value of the property `dummy.type` in the
 _src/main/resources/custom.properties_ file.
 
+== Case 3
+
+* The property `dummy.type` is in _src/main/resources/application.properties_
+  with value `dummy-type-on-default-location`
+
+* Set the OS environment variable `SPRING_CONFIG_LOCATION` with value
+  `classpath:/custom/location.properties`.
+  Example: `export
+  SPRING_CONFIG_LOCATION=classpath:/custom/location.properties`
+
+* Creates new properties file in _src/main/resources/custom/_ called
+  `location.properties`
+
+* The property `dummy.type` is in
+  _src/main/resources/custom/location.properties_ with value
+  `dummy-type-on-custom-config`
+
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the property `dummy.type` in the
+_src/main/resources/custom/location.properties_ file.
+
+
+
 
 
