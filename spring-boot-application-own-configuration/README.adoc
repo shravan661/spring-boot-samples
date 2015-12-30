@@ -21,11 +21,9 @@ application.
 
 == Setting up the build environment
 
-. Download Spring Boot 1.3.1.BUILD-SNAPSHOT source code, build and install it 
-  in your local Maven repo
-+
+Import this project as "External Maven project" in STS 3.7.
+
 NOTE: Spring Boot 1.3.1 is required due to this bug https://github.com/spring-projects/spring-boot/issues/4595
-. Import this project as "External Maven project" in STS 3.7
 
 == Run Tests
  
