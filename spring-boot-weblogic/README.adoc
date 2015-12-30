@@ -1,31 +1,10 @@
-= Spring Boot Application Own Configuration example
+= Spring Boot Weblogic 12c
 
-Proof of concept that shows the use of the Spring Boot configuration levels.
-
-Moreover it creates a new PropertySource that lets the application to load
-their own configuration in an multi-application environment, for example
-in a Java EE server in which there are multiple applications deployed.
-
-Spring Boot allows you to externalize your configuration so you can work with 
-the same application code in different environments. It uses
-OS environment variables, Java System properties or command line arguments 
-to setup the application properties outside the packaged war. The problem
-is that environment variables are shared by all running applications, for
-example applications deployed in the same Java EE server, causing that
-each application cannot have its own configuration properties in an OS 
-location outside the packaged war.
-
-Note JNDI variables could be a solution but there are deployment environments
-that don't use JNDI and need outside application properties files for each
-application.
+Proof of concept to test Spring Boot app deployment in Weblogic 12c
 
 == Setting up the build environment
 
-. Download Spring Boot 1.3.1.BUILD-SNAPSHOT source code, build and install it 
-  in your local Maven repo
-+
-NOTE: Spring Boot 1.3.1 is required due to this bug https://github.com/spring-projects/spring-boot/issues/4595
-. Import this project as "External Maven project" in STS 3.7
+Import this project as "External Maven project" in STS 3.7.
 
 == Run Tests
  
