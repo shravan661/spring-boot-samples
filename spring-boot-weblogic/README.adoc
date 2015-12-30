@@ -7,13 +7,10 @@ Proof of concept to test Spring Boot app deployment in Weblogic 12c
 Import this project as "External Maven project" in STS 3.7.
 
 == Run Tests
- 
-[source,shell]
-----
-curl -i -H 'Accept: application/json' http://localhost:8080/accounts?number=1111
-----
 
-This command will return an `Account` instance in JSON format.
+Use your browser to open the URL http://HOST:PORT/CONTEXT/accounts?number=1111
+
+This command will show you an HTML page with `Account` info.
 
 == Case 1
 
