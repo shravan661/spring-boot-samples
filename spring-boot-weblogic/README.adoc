@@ -1,0 +1,220 @@
+= Spring Boot Application Own Configuration example
+
+Proof of concept that shows the use of the Spring Boot configuration levels.
+
+Moreover it creates a new PropertySource that lets the application to load
+their own configuration in an multi-application environment, for example
+in a Java EE server in which there are multiple applications deployed.
+
+Spring Boot allows you to externalize your configuration so you can work with 
+the same application code in different environments. It uses
+OS environment variables, Java System properties or command line arguments 
+to setup the application properties outside the packaged war. The problem
+is that environment variables are shared by all running applications, for
+example applications deployed in the same Java EE server, causing that
+each application cannot have its own configuration properties in an OS 
+location outside the packaged war.
+
+Note JNDI variables could be a solution but there are deployment environments
+that don't use JNDI and need outside application properties files for each
+application.
+
+== Setting up the build environment
+
+. Download Spring Boot 1.3.1.BUILD-SNAPSHOT source code, build and install it 
+  in your local Maven repo
++
+NOTE: Spring Boot 1.3.1 is required due to this bug https://github.com/spring-projects/spring-boot/issues/4595
+. Import this project as "External Maven project" in STS 3.7
+
+== Run Tests
+ 
+[source,shell]
+----
+curl -i -H 'Accept: application/json' http://localhost:8080/accounts?number=1111
+----
+
+This command will return an `Account` instance in JSON format.
+
+== Case 1
+
+The property `dummy.type` is in _src/main/resources/application.properties_ 
+only.
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the property `dummy.type` in the _src/main/resources/application.properties_
+
+== Case 2
+
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration,
+  for example _/tmp/${spring.application.name}/application.properties_
++
+You must include the `spring.application.name` property in the 
+_src/main/resources/application.properties_ and set as value the name of the
+application.
+
+* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
+  indicating the base directory that contains the applications 
+  configurations.
+  Example: `export SPRING_APPLICATION_CONFIG_LOCATION="/tmp/"`
+
+NOTE: The name of the directory outside the application that must    
+contain the application configuration is composed following the
+pattern `SPRING_APPLICATION_CONFIG_LOCATION + ${spring.application.name} + "/"`
+
+IMPORTANT: If the property `spring.application.name` is not defined, 
+the application own configuration won't be loaded.
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the property `dummy.type` in the
+_/tmp/own-config-app/application.properties_
+
+== Case 3
+
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
+
+* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
+  indicating the base directory that contains the applications 
+  configurations.
+
+* Set the OS environment variable `DUMMY_TYPE`
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the OS env var `DUMMY_TYPE`
+
+== Case 4
+
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
+
+* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
+  indicating the base directory that contains the applications 
+  configurations.
+
+* Set the OS environment variable `DUMMY_TYPE`
+
+* Set the Java System properties `dummy.type`
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the Java System property `dummy.type`
+
+== Case 5
+
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
+
+* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
+  indicating the base directory that contains the applications 
+  configurations.
+
+* Set the OS environment variable `DUMMY_TYPE`
+
+* Set the Java System properties `dummy.type`
+
+* In _src/main/resources/application.properties_ set the Servlet 
+  context init parameters `dummy.type`.
+  For example
+  `server.context-parameters.dummy.type=type-as-servlet-context-param`
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the Servlet context parameter `dummy.type`
+
+== Case 6
+
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
+
+* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
+  indicating the base directory that contains the applications 
+  configurations.
+
+* Set the OS environment variable `DUMMY_TYPE`
+
+* Set the Java System properties `dummy.type`
+
+* In _src/main/resources/application.properties_ set the Servlet 
+  context init parameters `dummy.type`.
+
+* Set the JNDI variable `java:comp/env/DUMMY_TYPE`
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the JNDI variable `java:comp/env/DUMMY_TYPE`
+
+== Case 7
+
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
+
+* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
+  indicating the base directory that contains the applications 
+  configurations.
+
+* Set the OS environment variable `DUMMY_TYPE`
+
+* Set the Java System properties `dummy.type`
+
+* In _src/main/resources/application.properties_ set the Servlet 
+  context init parameters `dummy.type`.
+
+* Set the JNDI variable `java:comp/env/DUMMY_TYPE`
+
+* Set the OS environment variable `SPRING_APPLICATION_JSON` with the 
+  JSON message `{"dummy.type":"type-in-JSON-env-var"}` 
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the attribute `dummy.type` inside the
+JSON message.
+
+== Case 8
+
+* The property `dummy.type` is in _src/main/resources/application.properties_ 
+
+* The property `dummy.type` is defined in the application own configuration.
+
+* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
+  indicating the base directory that contains the applications 
+  configurations.
+
+* Set the OS environment variable `DUMMY_TYPE`
+
+* Set the Java System properties `dummy.type`
+
+* In _src/main/resources/application.properties_ set the Servlet 
+  context init parameters `dummy.type`.
+
+* Set the JNDI variable `java:comp/env/DUMMY_TYPE`
+
+* Set the OS environment variable `SPRING_APPLICATION_JSON` with the 
+  JSON message `{"dummy.type":"type-in-JSON-env-var"}`
+   
+* Set the command line argument `--dummy.type`
+
+=== Expected results
+
+The attribute `type` of the returned `Account` should have a value
+equal to the value of the command line argument `--dummy.type`
+
+
+
