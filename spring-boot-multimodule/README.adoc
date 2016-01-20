@@ -101,7 +101,8 @@ This is the main module of the project. It contains Application.java class,
 that contains main method, necessary to run Spring Boot applications. It
 contains all necessary application configuration properties. It contains all
 web controllers, views and web resources. It include Model Module and Service 
-Implementation module as dependency.
+Implementation module as dependency that contains Model Module, Repository
+Module and Service API module.
 
 === Test
 

@@ -11,17 +11,12 @@
     <name>Project Module - Application</name>
     <description>This is the main module of the project. It contains Application.java class, that contains main method, 
     necessary to run Spring Boot applications. It contains all necessary application configuration properties. 
-    It contains all web controllers, views and web resources. It include Model Module and Service Implementation module
-    as dependency. </description>
+    It contains all web controllers, views and web resources. It include Service Implementation module
+    as dependency that contains Model Module, Repository Module and Service Api Module. </description>
 
     <dependencies>
 
       <!-- Project modules -->
-      <dependency>
-        <groupId>sample.multimodule</groupId>
-        <artifactId>sample.multimodule.model</artifactId>
-        <version>${project.version}</version>
-      </dependency>
       <dependency>
         <groupId>sample.multimodule</groupId>
         <artifactId>sample.multimodule.service.impl</artifactId>
