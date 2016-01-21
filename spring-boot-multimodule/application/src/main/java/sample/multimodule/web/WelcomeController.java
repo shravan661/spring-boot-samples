@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sample.multimodule.domain.entities.Account;
+import sample.multimodule.domain.entity.Account;
 import sample.multimodule.service.api.AccountService;
 
 @Controller

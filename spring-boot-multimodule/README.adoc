@@ -36,7 +36,7 @@ structure.
 │               └── sample
 │                   └── multimodule
 │                       └── domain
-│                           └── entities
+│                           └── entity
 │                               └── Account.java
 ├── pom.xml
 ├── repository

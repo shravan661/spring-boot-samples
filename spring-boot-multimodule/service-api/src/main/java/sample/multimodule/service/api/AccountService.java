@@ -1,7 +1,7 @@
 package sample.multimodule.service.api;
 
 import java.util.List;
-import sample.multimodule.domain.entities.Account;
+import sample.multimodule.domain.entity.Account;
 
 public interface AccountService {
 

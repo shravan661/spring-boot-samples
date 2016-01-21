@@ -1,4 +1,4 @@
-package sample.multimodule.domain.entities;
+package sample.multimodule.domain.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
