@@ -15,14 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import proof.SpringDataTestApplication;
+import proof.SpringBootDataAccessApplication;
 import proof.model.Pet;
 import proof.model.PetType;
 import proof.repository.PetRepository;
 import proof.repository.PetTypeRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(SpringDataTestApplication.class)
+@SpringApplicationConfiguration(SpringBootDataAccessApplication.class)
 public class PetRepositoryIntegrationTest {
 	private static final Logger LOG = 
 			LoggerFactory.getLogger(PetRepositoryIntegrationTest.class);
@@ -35,7 +35,7 @@ public class PetRepositoryIntegrationTest {
 
 	@Test
 	public void testPetTypes() {
-		LOG.info("TEST PetTypes");
+		LOG.debug("TEST PetTypes");
 		List<PetType> findPetTypes = petTypeRepository.findAll();
 		assertNotNull(findPetTypes);
 		assertEquals(6, findPetTypes.size());
@@ -43,7 +43,7 @@ public class PetRepositoryIntegrationTest {
 	
 	@Test
 	public void testFindAllDefault() throws Exception {
-		LOG.info("TEST Find All Pets default method");
+		LOG.debug("TEST Find All Pets default method");
 		List<Pet> findAllPets = repository.findAll();
 		assertNotNull(findAllPets);
 		assertEquals(13, findAllPets.size());
@@ -51,7 +51,7 @@ public class PetRepositoryIntegrationTest {
 	
 	@Test
 	public void testFindAllUsingJoinFetch() throws Exception {
-		LOG.info("TEST Find All Pets using join fetch");
+		LOG.debug("TEST Find All Pets using join fetch");
 		List<Pet> findAllPets = repository.findAllUsingJoinFetch();
 		assertNotNull(findAllPets);
 		assertEquals(13, findAllPets.size());
@@ -59,7 +59,7 @@ public class PetRepositoryIntegrationTest {
 	
 	@Test
 	public void testFindAllUsingEntityGraph() throws Exception {
-		LOG.info("TEST Find All Pets using EntityGraph");
+		LOG.debug("TEST Find All Pets using EntityGraph");
 		List<Pet> findAllPets = repository.findAllUsingEntityGraph();
 		assertNotNull(findAllPets);
 		assertEquals(13, findAllPets.size());
@@ -67,7 +67,7 @@ public class PetRepositoryIntegrationTest {
 	
 	@Test
 	public void testFindAllUsingNativeQuery() throws Exception {
-		LOG.info("TEST Find All Pets using native query");
+		LOG.debug("TEST Find All Pets using native query");
 		List<Pet> findAllPets = repository.findAllUsingNativeQuery();
 		assertNotNull(findAllPets);
 		assertEquals(13, findAllPets.size());
@@ -75,7 +75,7 @@ public class PetRepositoryIntegrationTest {
 	
 	@Test
 	public void testFindAllUsingJoinAndNativeQuery() throws Exception {
-		LOG.info("TEST Find All Pets using native query and a join with PET_TYPES");
+		LOG.debug("TEST Find All Pets using native query and a join with PET_TYPES");
 		List<Object[]> findAllPets = repository.findAllUsingJoinAndNativeQuery();
 		assertNotNull(findAllPets);
 		assertEquals(13, findAllPets.size());
@@ -83,7 +83,7 @@ public class PetRepositoryIntegrationTest {
 
 	@Test
 	public void testCreatePet() {
-		LOG.info("TEST create a new Pet");		
+		LOG.debug("TEST create a new Pet");		
 		
 		Pet pet = new Pet();
 		pet.setBirthDate(new Date());
@@ -92,7 +92,7 @@ public class PetRepositoryIntegrationTest {
 		
 		Pet savedPet = repository.save(pet);
 		
-		LOG.info("Created pet with id = {}", savedPet.getId());
+		LOG.debug("Created pet with id = {}", savedPet.getId());
 		
 		assertEquals(pet.getBirthDate(), savedPet.getBirthDate());
 		assertEquals(pet.getName(), savedPet.getName());
@@ -103,7 +103,7 @@ public class PetRepositoryIntegrationTest {
 	
 	@Test
 	public void testFindBornBetweenDates() {
-		LOG.info("TEST find Pets born between dates");
+		LOG.debug("TEST find Pets born between dates");
 		
 		List<Pet> pets = repository.findBornBetweenDates(null, null);
 		assertEquals(13, pets.size());
@@ -127,37 +127,37 @@ public class PetRepositoryIntegrationTest {
 	
 	@Test
 	public void testNamedProcedure() throws Exception {
-		LOG.info("TEST Calling a named procedure by its database name");
+		LOG.debug("TEST Calling a named procedure by its database name");
 		assertEquals(new Integer(2), repository.namedProcedure(1));
 	}
 	
 	@Test
 	public void testCustomNamedProcedure() throws Exception {
-		LOG.info("TEST Calling a named procedure by its custom name");
+		LOG.debug("TEST Calling a named procedure by its custom name");
 		assertEquals(new Integer(2), repository.customNamedProcedure(1));
 	}
 	
 	@Test
 	public void testMethodNamedProcedure() throws Exception {
-		LOG.info("TEST Calling a named procedure by the repository method name");
+		LOG.debug("TEST Calling a named procedure by the repository method name");
 		assertEquals(new Integer(2), repository.plus1(1));
 	}
 	
 	@Test
 	public void testNotNamedProcedure() throws Exception {
-		LOG.info("TEST Calling a not named procedure by its database name");
+		LOG.debug("TEST Calling a not named procedure by its database name");
 		assertEquals(new Integer(3), repository.notNamedProcedure(1));
 	}
 
 	@Test
 	public void testNotNamedProcedure2() throws Exception {
-		LOG.info("TEST Calling a not named procedure 2 by its database name");
+		LOG.debug("TEST Calling a not named procedure 2 by its database name");
 		assertEquals(new Integer(3), repository.plus2inout(1));
 	}
 
 	@Test
 	public void testLogging() throws Exception {
-		LOG.info("TEST logging usage with parameters value1={}, value2={}", 10, 20);
+		LOG.debug("TEST logging usage with parameters value1={}, value2={}", 10, 20);
 	}
 
 }

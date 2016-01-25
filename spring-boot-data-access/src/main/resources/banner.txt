@@ -1,0 +1,5 @@
+===========================================================
+MINISTERIO DE SANIDAD, SERVICIOS SOCIALES E IGUALDAD  
+APLICACIÓN: ${application.title} ${application.formatted-version}
+(Basada en Spring Boot ${spring-boot.formatted-version})
+===========================================================

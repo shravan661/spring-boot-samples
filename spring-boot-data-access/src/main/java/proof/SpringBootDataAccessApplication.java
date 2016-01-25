@@ -4,9 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringDataTestApplication {
+public class SpringBootDataAccessApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringDataTestApplication.class, args);
+//    	if (true) throw new Error("ERROR de PRUEBA");
+        SpringApplication.run(SpringBootDataAccessApplication.class, args);
     }
 }

@@ -6,7 +6,7 @@
 	<groupId>org.gvnix.proof</groupId>
 	<artifactId>spring-boot-data-access</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>spring-boot-data-access</name>
 	<description>Proof project for Spring Boot with the data access layer</description>
