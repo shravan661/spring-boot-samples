@@ -49,7 +49,7 @@ public class WelcomeController {
     }
     
     // Return show view with 23 account info
-    String accountInfo = "Account Number: ".concat(account.getNumber());
+    String accountInfo = "Your account number is ".concat(account.getNumber());
     model.put("message", this.message);
     model.put("account", accountInfo);
 		return "welcome/show";
