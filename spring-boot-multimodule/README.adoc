@@ -21,13 +21,11 @@ structure.
 │           │           ├── SampleWebJspApplication.java
 │           │           └── web
 │           │               └── WelcomeController.java
-│           ├── resources
-│           │   └── application.properties
-│           └── webapp
-│               └── WEB-INF
-│                   └── views
-│                       └── welcome
-│                           └── show.jspx
+│           └── resources
+│               ├── application.properties
+│               └── templates
+│                   └── welcome
+│                       └── show.html
 ├── model
 │   ├── pom.xml
 │   └── src
@@ -69,6 +67,7 @@ structure.
                         └── service
                             └── impl
                                 └── AccountServiceImpl.java
+
 ----
 
 Every module match with some application layer (service layer, repository layer, web layer, model, etc..).
