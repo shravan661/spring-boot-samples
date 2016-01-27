@@ -1,0 +1,13 @@
+= Spring Boot data access layer proof of concept
+
+Proof of concept that shows how to configure and use elements of the data layer 
+of an application.
+
+It is based mainly on Spring Data JPA, QueryDSL and Liquibase. The project 
+contains only code for the data model (JPA Entities), Spring Data JPA 
+repositories and integration tests for the repository methods.
+
+== Setting up the build environment
+
+Just import this project as "External Maven project" in STS
+
