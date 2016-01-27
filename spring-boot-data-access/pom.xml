@@ -10,17 +10,18 @@
 
 	<name>spring-boot-data-access</name>
 	<description>Proof project for Spring Boot with the data access layer</description>
-	
+
 	<parent>
-	    <groupId>io.spring.platform</groupId>
-	    <artifactId>platform-bom</artifactId>
-	    <version>2.0.1.RELEASE</version>
-	    <relativePath/>
+		<groupId>io.spring.platform</groupId>
+		<artifactId>platform-bom</artifactId>
+		<version>2.0.1.RELEASE</version>
+		<relativePath />
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<liquibase.version>3.4.2</liquibase.version>
 	</properties>
 
 	<dependencies>
@@ -29,13 +30,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
+
 		<!-- Testing on memory database -->
-		<!--dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency-->
+		<!--dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
+			<scope>runtime</scope> </dependency -->
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -45,7 +43,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- QueryDSL support -->
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
@@ -56,9 +54,9 @@
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -66,9 +64,9 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<!-- QueryDSL automatic generation of QEntity classes -->			
+			<!-- QueryDSL automatic generation of QEntity classes -->
 			<plugin>
-	     		<groupId>com.mysema.maven</groupId>
+				<groupId>com.mysema.maven</groupId>
 				<artifactId>apt-maven-plugin</artifactId>
 				<executions>
 					<execution>
@@ -82,9 +80,18 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase.version}</version>
+				<configuration>
+					<changeLogFile>src/main/liquibase/db.changelog-master.xml</changeLogFile>
+					<propertyFileWillOverride>true</propertyFileWillOverride>
+					<propertyFile>src/main/liquibase/liquibase.properties</propertyFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
 
 </project>

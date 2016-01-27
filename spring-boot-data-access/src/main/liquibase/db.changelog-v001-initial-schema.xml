@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<!-- Acrónimo de la aplicación: SBDATAAC -->
+
+	<changeSet author="cordin" id="pet_types-v001">
+		<comment>Table for the Pet Types</comment>
+		<createTable tableName="SBDATAAC_PET_TYPES">
+			<column name="PET_TYPE_ID" type="BIGINT" remarks="Identifier">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="SBDATAAC_PET_TYPES_PK" />
+			</column>
+			<column name="NAME" type="java.sql.Types.VARCHAR(255)"
+				remarks="Pet type name" />
+		</createTable>
+		<createSequence sequenceName="SBDATAAC_PET_TYPES_PET_TYPE_ID_SEQ"
+			startValue="1" />
+		<rollback>
+			<dropSequence sequenceName="SBDATAAC_PET_TYPES_PET_TYPE_ID_SEQ" />
+			<dropTable tableName="SBDATAAC_PET_TYPES" />
+		</rollback>
+	</changeSet>
+
+	<changeSet author="cordin" id="pets-v001">
+		<comment>Table for Pets</comment>
+		<createTable tableName="SBDATAAC_PETS">
+			<column name="PET_ID" type="BIGINT" remarks="Identifier">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="SBDATAAC_PETS_PK" />
+			</column>
+			<column name="BIRTH_DATE" type="DATE" remarks="Pet birth date" />
+			<column name="NAME" type="java.sql.Types.VARCHAR(255)"
+				remarks="Pet name" />
+			<column name="PET_TYPE_ID" type="BIGINT" remarks="Pet type identifier">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="PET_TYPE_ID"
+			baseTableName="SBDATAAC_PETS" constraintName="SBDATAAC_PETS_PET_TYPES_FK"
+			onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="PET_TYPE_ID"
+			referencedTableName="SBDATAAC_PET_TYPES" />
+		<createSequence sequenceName="SBDATAAC_PETS_PET_ID_SEQ"
+			startValue="1" />
+		<rollback>
+			<dropForeignKeyConstraint baseTableName="SBDATAAC_PETS"
+				constraintName="SBDATAAC_PETS_PET_TYPES_FK" />
+			<dropSequence sequenceName="SBDATAAC_PETS_PET_ID_SEQ" />
+			<dropTable tableName="SBDATAAC_PETS" />
+		</rollback>
+	</changeSet>
+
+	<changeSet author="cordin" id="plus1inout-v001">
+		<comment>Procedimiento de prueba que suma 1 al valor proporcionado</comment>
+		<createProcedure dbms="hsqldb" procedureName="PRC_PLUS1INOUT">
+			CREATE PROCEDURE PRC_PLUS1INOUT
+			(IN arg int, OUT res int)
+			BEGIN ATOMIC
+			SET res = arg + 1;
+			END
+		</createProcedure>
+	</changeSet>
+
+	<changeSet author="cordin" id="plus2inout-v001">
+		<comment>Procedimiento de prueba que suma 2 al valor proporcionado</comment>
+		<createProcedure dbms="hsqldb" procedureName="PRC_PLUS2INOUT">
+			CREATE PROCEDURE PRC_PLUS2INOUT
+			(IN arg int, OUT res int)
+			BEGIN ATOMIC
+			SET res = arg + 2;
+			END
+		</createProcedure>
+	</changeSet>
+
+	<!-- Creates the tag 'v001-initial-schema' -->
+	<changeSet author="cordin" id="v001-initial-schema" context="devel">
+		<tagDatabase tag="v001-initial-schema" />
+	</changeSet>
+</databaseChangeLog>
