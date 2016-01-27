@@ -12,13 +12,19 @@
         <groupId>io.spring.platform</groupId>
         <artifactId>platform-bom</artifactId>
         <version>2.0.1.RELEASE</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>tomcat-embed-el</artifactId>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,27 +32,33 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <artifactId>tomcat-embed-el</artifactId>
+                    <groupId>org.apache.tomcat.embed</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <artifactId>spring-boot-legacy</artifactId>
+            <version>1.0.2.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <properties>
-        <java.version>1.6</java.version>
+        <java.version>1.7</java.version>
+        <asciidoclet.version>1.5.4</asciidoclet.version>
     </properties>
 
     <build>
@@ -58,31 +70,29 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <doclet>org.asciidoctor.Asciidoclet</doclet>
+                    <docletArtifact>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoclet</artifactId>
+                        <version>${asciidoclet.version}</version>
+                    </docletArtifact>
+                    <additionalparam>
+                        --base-dir ${project.basedir}
+                        --attribute "projectName=${project.name}"
+                        --attribute "projectVersion=${project.version}"
+                        --attribute "doctype=book"
+                    </additionalparam>
+                    <linksource>true</linksource>
+                    <!-- Overview document can also be a Asciidoctor document -->
+                    <overview>src/main/java/overview.adoc</overview>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>spring-releases</id>
-            <url>https://repo.spring.io/libs-release</url>
-        </repository>
-        <repository>
-            <id>spring-snapshots</id>
-            <url>http://repo.spring.io/libs-snapshot</url>
-            <snapshots><enabled>true</enabled></snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-releases</id>
-            <url>https://repo.spring.io/libs-release</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <url>http://repo.spring.io/libs-snapshot</url>
-            <snapshots><enabled>true</enabled></snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>

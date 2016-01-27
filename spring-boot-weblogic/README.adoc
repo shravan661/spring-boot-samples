@@ -1,6 +1,9 @@
 = Spring Boot Weblogic 12c
 
-Proof of concept to test Spring Boot app deployment in Weblogic 12c
+Proof of concept to test Spring Boot app deployment in Weblogic 12.2.1.
+
+This PoC solves the issue 
+http://stackoverflow.com/questions/34525967/spring-boot-exception-could-not-open-servletcontext-resource-web-inf-dispatch[Spring Boot exception: Could not open ServletContext resource]
 
 == Setting up the build environment
 
@@ -8,189 +11,22 @@ Import this project as "External Maven project" in STS 3.7.
 
 == Run Tests
 
-Use your browser to open the URL http://HOST:PORT/CONTEXT/accounts?number=1111
+Web integration tests have been developed for testing purposes, take a look to
+_src/test/java_.
 
-This command will show you an HTML page with `Account` info.
+To execute these tests just run JUnit from the STS or `mvn test` from
+your favorite shell.
 
-== Case 1
-
-The property `dummy.type` is in _src/main/resources/application.properties_ 
-only.
-
-=== Expected results
-
-The attribute `type` of the returned `Account` should have a value
-equal to the value of the property `dummy.type` in the _src/main/resources/application.properties_
-
-== Case 2
+== Test Case
 
 * The property `dummy.type` is in _src/main/resources/application.properties_ 
 
-* The property `dummy.type` is defined in the application own configuration,
-  for example _/tmp/${spring.application.name}/application.properties_
-+
-You must include the `spring.application.name` property in the 
-_src/main/resources/application.properties_ and set as value the name of the
-application.
-
-* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
-  indicating the base directory that contains the applications 
-  configurations.
-  Example: `export SPRING_APPLICATION_CONFIG_LOCATION="/tmp/"`
-
-NOTE: The name of the directory outside the application that must    
-contain the application configuration is composed following the
-pattern `SPRING_APPLICATION_CONFIG_LOCATION + ${spring.application.name} + "/"`
-
-IMPORTANT: If the property `spring.application.name` is not defined, 
-the application own configuration won't be loaded.
+* Set the JNDI attribute `java:comp/env/DUMMY_TYPE`, via an `env-entry` in the
+  _web.xml_ file.
 
 === Expected results
 
 The attribute `type` of the returned `Account` should have a value
-equal to the value of the property `dummy.type` in the
-_/tmp/own-config-app/application.properties_
-
-== Case 3
-
-* The property `dummy.type` is in _src/main/resources/application.properties_ 
-
-* The property `dummy.type` is defined in the application own configuration.
-
-* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
-  indicating the base directory that contains the applications 
-  configurations.
-
-* Set the OS environment variable `DUMMY_TYPE`
-
-=== Expected results
-
-The attribute `type` of the returned `Account` should have a value
-equal to the value of the OS env var `DUMMY_TYPE`
-
-== Case 4
-
-* The property `dummy.type` is in _src/main/resources/application.properties_ 
-
-* The property `dummy.type` is defined in the application own configuration.
-
-* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
-  indicating the base directory that contains the applications 
-  configurations.
-
-* Set the OS environment variable `DUMMY_TYPE`
-
-* Set the Java System properties `dummy.type`
-
-=== Expected results
-
-The attribute `type` of the returned `Account` should have a value
-equal to the value of the Java System property `dummy.type`
-
-== Case 5
-
-* The property `dummy.type` is in _src/main/resources/application.properties_ 
-
-* The property `dummy.type` is defined in the application own configuration.
-
-* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
-  indicating the base directory that contains the applications 
-  configurations.
-
-* Set the OS environment variable `DUMMY_TYPE`
-
-* Set the Java System properties `dummy.type`
-
-* In _src/main/resources/application.properties_ set the Servlet 
-  context init parameters `dummy.type`.
-  For example
-  `server.context-parameters.dummy.type=type-as-servlet-context-param`
-
-=== Expected results
-
-The attribute `type` of the returned `Account` should have a value
-equal to the value of the Servlet context parameter `dummy.type`
-
-== Case 6
-
-* The property `dummy.type` is in _src/main/resources/application.properties_ 
-
-* The property `dummy.type` is defined in the application own configuration.
-
-* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
-  indicating the base directory that contains the applications 
-  configurations.
-
-* Set the OS environment variable `DUMMY_TYPE`
-
-* Set the Java System properties `dummy.type`
-
-* In _src/main/resources/application.properties_ set the Servlet 
-  context init parameters `dummy.type`.
-
-* Set the JNDI variable `java:comp/env/DUMMY_TYPE`
-
-=== Expected results
-
-The attribute `type` of the returned `Account` should have a value
-equal to the value of the JNDI variable `java:comp/env/DUMMY_TYPE`
-
-== Case 7
-
-* The property `dummy.type` is in _src/main/resources/application.properties_ 
-
-* The property `dummy.type` is defined in the application own configuration.
-
-* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
-  indicating the base directory that contains the applications 
-  configurations.
-
-* Set the OS environment variable `DUMMY_TYPE`
-
-* Set the Java System properties `dummy.type`
-
-* In _src/main/resources/application.properties_ set the Servlet 
-  context init parameters `dummy.type`.
-
-* Set the JNDI variable `java:comp/env/DUMMY_TYPE`
-
-* Set the OS environment variable `SPRING_APPLICATION_JSON` with the 
-  JSON message `{"dummy.type":"type-in-JSON-env-var"}` 
-
-=== Expected results
-
-The attribute `type` of the returned `Account` should have a value
-equal to the value of the attribute `dummy.type` inside the
-JSON message.
-
-== Case 8
-
-* The property `dummy.type` is in _src/main/resources/application.properties_ 
-
-* The property `dummy.type` is defined in the application own configuration.
-
-* Set the OS environment variable `SPRING_APPLICATION_CONFIG_LOCATION` 
-  indicating the base directory that contains the applications 
-  configurations.
-
-* Set the OS environment variable `DUMMY_TYPE`
-
-* Set the Java System properties `dummy.type`
-
-* In _src/main/resources/application.properties_ set the Servlet 
-  context init parameters `dummy.type`.
-
-* Set the JNDI variable `java:comp/env/DUMMY_TYPE`
-
-* Set the OS environment variable `SPRING_APPLICATION_JSON` with the 
-  JSON message `{"dummy.type":"type-in-JSON-env-var"}`
-   
-* Set the command line argument `--dummy.type`
-
-=== Expected results
-
-The attribute `type` of the returned `Account` should have a value
-equal to the value of the command line argument `--dummy.type`
-
+equal to the value of the JNDI attribute `java:comp/env/DUMMY_TYPE`
 
 
