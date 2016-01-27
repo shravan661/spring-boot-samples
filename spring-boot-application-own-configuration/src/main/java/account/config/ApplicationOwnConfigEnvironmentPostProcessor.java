@@ -1,18 +1,18 @@
 /*
  * Copyright (C) 2015 DISID CORPORATION S.L.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
  * 
  * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+ * along with this program. If not, see `<http://www.gnu.org/licenses/>`.
  */
 package account.config;
 
@@ -20,8 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.config.RandomValuePropertySource;
 import org.springframework.boot.env.EnvironmentPostProcessor;
@@ -37,32 +37,34 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.StandardServletEnvironment;
 
 /**
- * An {@link EnvironmentPostProcessor} to let each application to use 
- * its own application-specific properties in a multi-application server. 
- * <p/>
- * The application-specific properties outside the packaged jar/war
- * will have a precedence immediately lower than the 
- * {@code RandomValuePropertySource] and immediately higher than the 
- * application {@code ConfigurationPropertySources}.
- * <p/>
- * The default <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config">Spring Boot PropertySource order</a>
- * will be modified as follows:  
+ * = Application-specific externalised configuration
  * 
- * <ol>
- * <li>Command line arguments.</li>
- * <li>Properties from {@code SPRING_APPLICATION_JSON}</li>
- * <li>JNDI attributes from {@code java:comp/env}</li>
- * <li>Java System properties (System.getProperties())</li>
- * <li>OS environment variables</li>
- * <li>A RandomValuePropertySource that only has properties in random.*</li>
- * <li><strong>Application-specific properties outside the packaged jar/war</strong></li>
- * <li>Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)</li>
- * <li>Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants)</li>
- * <li>Application properties outside of your packaged jar (application.properties and YAML variants)</li>
- * <li>Application properties packaged inside your jar (application.properties and YAML variants)</li>
- * <li>etc.</li>
- * </ol>
+ * An {@link EnvironmentPostProcessor} to let each
+ * application to use its own application-specific properties in a
+ * multi-application server.
+ * 
+ * The application-specific properties outside the
+ * packaged jar/war will have a precedence immediately lower than the
+ * `RandomValuePropertySource` and immediately higher than the application
+ * `ConfigurationPropertySources`.
+ * 
+ * The default http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config[Spring Boot PropertySource order]
+ * will be modified as follows: 
+ * 
+ * . Command line arguments. 
+ * . Properties from `SPRING_APPLICATION_JSON` 
+ * . JNDI attributes from `java:comp/env` 
+ * . Java System properties (`System.getProperties()`)
+ * . OS environment variables
+ * . A RandomValuePropertySource that only has properties in random.
+ * . *Application-specific properties outside the packaged jar/war* 
+ * . Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants) 
+ * . Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants) 
+ * . Application properties outside of your packaged jar (application.properties and YAML variants) 
+ * . Application properties packaged inside your jar (application.properties and YAML variants) 
+ * . etc.
  *
+ * @see https://github.com/spring-projects/spring-boot/issues/4800
  * @author Enrique Ruiz
  */
 public class ApplicationOwnConfigEnvironmentPostProcessor implements
@@ -74,8 +76,7 @@ public class ApplicationOwnConfigEnvironmentPostProcessor implements
     /** The default order for the processor */
     public static final int DEFAULT_ORDER = Ordered.HIGHEST_PRECEDENCE + 15;
 
-    private static final Logger logger = LogManager
-            .getLogger(ApplicationOwnConfigEnvironmentPostProcessor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationOwnConfigEnvironmentPostProcessor.class);
 
     private int order = DEFAULT_ORDER;
 
@@ -148,23 +149,26 @@ public class ApplicationOwnConfigEnvironmentPostProcessor implements
      */
     private Properties loadProperties(File parent, String filename) {
         if (StringUtils.isEmpty(filename)) {
-            logger.error("The given filename is empty.");
-        }else if (!parent.isDirectory()) {
-            logger.error("The given parent directory ".concat(
+            LOG.error("The given filename is empty.");
+        }
+        else if (!parent.isDirectory()) {
+            LOG.error("The given parent directory ".concat(
                     parent.getAbsolutePath()).concat(" is not a directory."));
-        }else {
+        }
+        else {
 
             File propertyFile = new File(parent, filename);
             if (propertyFile != null && propertyFile.exists()
                     && propertyFile.isFile()) {
-                FileSystemResource resource = new FileSystemResource(propertyFile);
+                FileSystemResource resource = new FileSystemResource(
+                        propertyFile);
                 Properties properties;
                 try {
                     properties = PropertiesLoaderUtils.loadProperties(resource);
                     return properties;
                 }
                 catch (IOException ex) {
-                    logger.error("Unable to load " + filename, ex);
+                    LOG.error("Unable to load " + filename, ex);
                 }
             }
         }
@@ -172,28 +176,26 @@ public class ApplicationOwnConfigEnvironmentPostProcessor implements
     }
 
     /**
-     * Add the given PropertySource to the application Environment
-     * with a precedence immediately lower than the 
-     * {@code RandomValuePropertySource] and immediately higher than the 
-     * application {@code ConfigurationPropertySources}.
-     * <p/>
-     * The default <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config">Spring Boot PropertySource order</a>
-     * will be modified as follows:  
+     * Add the given PropertySource to the application Environment with a
+     * precedence immediately lower than the
+     * `RandomValuePropertySource` and immediately higher than the
+     * application `ConfigurationPropertySources`.
      * 
-     * <ol>
-     * <li>Command line arguments.</li>
-     * <li>Properties from {@code SPRING_APPLICATION_JSON}</li>
-     * <li>JNDI attributes from {@code java:comp/env}</li>
-     * <li>Java System properties (System.getProperties())</li>
-     * <li>OS environment variables</li>
-     * <li>A RandomValuePropertySource that only has properties in random.*</li>
-     * <li><strong>Application-specific properties outside the packaged jar/war</strong> &lt;-- The new PropertySource will be added here.</li>
-     * <li>Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)</li>
-     * <li>Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants)</li>
-     * <li>Application properties outside of your packaged jar (application.properties and YAML variants)</li>
-     * <li>Application properties packaged inside your jar (application.properties and YAML variants)</li>
-     * <li>etc.</li>
-     * </ol>
+     * The default http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config[Spring Boot PropertySource order]
+     * will be modified as follows:
+     * 
+     * . Command line arguments. 
+     * . Properties from `SPRING_APPLICATION_JSON` 
+     * . JNDI attributes from `java:comp/env` 
+     * . Java System properties (`System.getProperties()`)
+     * . OS environment variables
+     * . A RandomValuePropertySource that only has properties in random.
+     * . *Application-specific properties outside the packaged jar/war* 
+     * . Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants) 
+     * . Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants) 
+     * . Application properties outside of your packaged jar (application.properties and YAML variants) 
+     * . Application properties packaged inside your jar (application.properties and YAML variants) 
+     * . etc.
      * 
      * @param environment
      * @param source
@@ -216,28 +218,31 @@ public class ApplicationOwnConfigEnvironmentPostProcessor implements
     }
 
     /**
-     * Get the name of the lower PropertySource to be able to add a new 
-     * PropertySource immediately higher than the application 
-     * {@code ConfigurationPropertySources}.
+     * Get the name of the lower PropertySource to be able to add a new
+     * PropertySource immediately higher than the application
+     * `ConfigurationPropertySources`.
      * <p/>
-     * The default <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config">Spring Boot PropertySource order</a>
-     * will be modified as follows:  
+     * The default <a href=
+     * "http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config[Spring Boot PropertySource order]
+     *  will be modified as follows:
      * 
-     * <ol>
-     * <li>Command line arguments.</li>
-     * <li>Properties from {@code SPRING_APPLICATION_JSON}</li>
-     * <li>JNDI attributes from {@code java:comp/env}</li>
-     * <li>Java System properties (System.getProperties())</li>
-     * <li>OS environment variables</li>
-     * <li>A RandomValuePropertySource that only has properties in random.*</li>
-     * <li><strong>Application-specific properties</strong> &lt;-- The new PropertySource will be added here.</li>
-     * <li>etc.</li>
-     * </ol>
+     * . Command line arguments. 
+     * . Properties from `SPRING_APPLICATION_JSON` 
+     * . JNDI attributes from `java:comp/env` 
+     * . Java System properties (`System.getProperties()`)
+     * . OS environment variables
+     * . A RandomValuePropertySource that only has properties in random.
+     * . *Application-specific properties outside the packaged jar/war* 
+     * . Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants) 
+     * . Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants) 
+     * . Application properties outside of your packaged jar (application.properties and YAML variants) 
+     * . Application properties packaged inside your jar (application.properties and YAML variants) 
+     * . etc.
      * 
      * @param sources
-     * @return The name of the {@code PropertySource} after which to add
-     * the application-specific properties, or null if any of the previous
-     * PropertySources found.
+     * @return The name of the {@code PropertySource} after which to add the
+     *         application-specific properties, or null if any of the previous
+     *         PropertySources found.
      */
     private String findPropertySource(MutablePropertySources sources) {
         if (sources
