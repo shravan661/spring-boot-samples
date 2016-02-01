@@ -5,9 +5,9 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 	<!-- Acrónimo de la aplicación: SBDATAAC -->
-	<changeSet author="cordin" id="pets-sample-data">
+	<changeSet author="cordin" id="pets-sample-data" context="test">
 		<loadData tableName="SBDATAAC_PETS" file="pets.csv"
-			relativeToChangelogFile="true" />
+			relativeToChangelogFile="true"  />
 	</changeSet>
 
 </databaseChangeLog>
