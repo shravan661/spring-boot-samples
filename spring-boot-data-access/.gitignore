@@ -7,3 +7,4 @@ target
 spring-boot-data-access-db.log
 spring-boot-data-access-db.properties
 spring-boot-data-access-db.script
+spring-boot-data-access-db.tmp
