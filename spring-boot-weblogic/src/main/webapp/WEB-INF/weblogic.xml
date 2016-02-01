@@ -10,5 +10,9 @@
         <wls:prefer-application-packages>
             <wls:package-name>org.slf4j</wls:package-name>
         </wls:prefer-application-packages>
+<!--
+      <wls:container-initializer-enabled>false</wls:container-initializer-enabled>
+      <wls:prefer-web-inf-classes>true</wls:prefer-web-inf-classes>
+-->
     </wls:container-descriptor>
 </wls:weblogic-web-app>

@@ -16,6 +16,8 @@
  */
 package account.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,8 @@ import account.service.AccountService;
 @Controller
 class AccountController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
+
     @Autowired
     protected AccountService accountService;
 
@@ -41,6 +45,7 @@ class AccountController {
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody Account getAccount(@RequestParam String number) {
         Account account = accountService.findOne(number);
+        LOG.info("Account found: ".concat(account.toString()));
         return account;
     }
 

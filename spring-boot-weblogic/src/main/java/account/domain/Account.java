@@ -61,4 +61,10 @@ public class Account {
         this.creditCardNumber = creditCardNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Account [id=" + id + ", number=" + number + ", type=" + type
+                + ", creditCardNumber=" + creditCardNumber + "]";
+    }
+
 }

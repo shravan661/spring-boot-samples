@@ -25,26 +25,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j</artifactId>
-        </dependency>
     </dependencies>
 
     <properties>
-        <java.version>1.6</java.version>
+        <java.version>1.7</java.version>
+        <asciidoclet.version>1.5.4</asciidoclet.version>
     </properties>
 
     <build>
@@ -54,6 +45,28 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <doclet>org.asciidoctor.Asciidoclet</doclet>
+                    <docletArtifact>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoclet</artifactId>
+                        <version>${asciidoclet.version}</version>
+                    </docletArtifact>
+                    <additionalparam>
+                        --base-dir ${project.basedir}
+                        --attribute "projectName=${project.name}"
+                        --attribute "projectVersion=${project.version}"
+                        --attribute "doctype=book"
+                    </additionalparam>
+                    <linksource>true</linksource>
+                    <!-- Overview document can also be a Asciidoctor document -->
+                    <overview>src/main/java/overview.adoc</overview>
                 </configuration>
             </plugin>
         </plugins>

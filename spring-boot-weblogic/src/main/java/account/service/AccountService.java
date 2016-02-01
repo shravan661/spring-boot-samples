@@ -4,10 +4,17 @@ import java.util.List;
 
 import account.domain.Account;
 
+/**
+ * = Javadoc in Asciidoc
+ * 
+ * Sample comments in `Asciidoctor`.
+ * 
+ * @author eruiz
+ */
 public interface AccountService {
 
     /**
-     * Finds the account with the provided account number.
+     * Finds the *Account* with the provided account number.
      * 
      * @param number The account number
      * @return The account
@@ -16,10 +23,10 @@ public interface AccountService {
     Account findOne(String number) throws AccountNotFoundException;
 
     /**
-     * Return a listing of all accounts for a given customer.
+     * Return a listing of all *Account* for a given customer.
      * 
      * @param owner
-     *            Name of the owner of the accounts.
+     *            Name of the _owner_ of the accounts.
      * @return the account listing
      */
     List<Account> findAllAccounts(String owner);
