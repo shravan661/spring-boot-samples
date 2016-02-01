@@ -22,17 +22,18 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "PETS")
+@Table(name = "SBDATAAC_PETS")
 @NamedEntityGraph(name = "Pet.type",
 				  attributeNodes = @NamedAttributeNode("type"))
-@NamedStoredProcedureQuery(name = "Pet.plus1", procedureName = "plus1inout", parameters = {
+@NamedStoredProcedureQuery(name = "Pet.plus1", procedureName = "PRC_PLUS1INOUT", parameters = {
 		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "arg", type = Integer.class),
 		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "res", type = Integer.class) })
 public class Pet {
 
 	@Id
+	@Column(name = "PET_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_seq")
-	@SequenceGenerator(name = "pet_seq", sequenceName = "PET_SEQ")
+	@SequenceGenerator(name = "pet_seq", sequenceName = "SBDATAAC_PETS_PET_ID_SEQ")
 	protected Long id;
 	
 	@Column(name = "NAME")
@@ -44,7 +45,7 @@ public class Pet {
     private Date birthDate;
 
     @ManyToOne
-    @JoinColumn(name = "TYPE_ID")
+    @JoinColumn(name = "PET_TYPE_ID")
     private PetType type;
 
 	public Long getId() {

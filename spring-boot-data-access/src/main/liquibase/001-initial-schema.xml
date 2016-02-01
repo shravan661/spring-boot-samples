@@ -6,7 +6,7 @@
 
 	<!-- Acrónimo de la aplicación: SBDATAAC -->
 
-	<changeSet author="cordin" id="pet_types-v001">
+	<changeSet author="cordin" id="001-pet_types">
 		<comment>Table for the Pet Types</comment>
 		<createTable tableName="SBDATAAC_PET_TYPES">
 			<column name="PET_TYPE_ID" type="BIGINT" remarks="Identifier">
@@ -18,13 +18,9 @@
 		</createTable>
 		<createSequence sequenceName="SBDATAAC_PET_TYPES_PET_TYPE_ID_SEQ"
 			startValue="1" />
-		<rollback>
-			<dropSequence sequenceName="SBDATAAC_PET_TYPES_PET_TYPE_ID_SEQ" />
-			<dropTable tableName="SBDATAAC_PET_TYPES" />
-		</rollback>
 	</changeSet>
 
-	<changeSet author="cordin" id="pets-v001">
+	<changeSet author="cordin" id="001-pets">
 		<comment>Table for Pets</comment>
 		<createTable tableName="SBDATAAC_PETS">
 			<column name="PET_ID" type="BIGINT" remarks="Identifier">
@@ -44,15 +40,9 @@
 			referencedTableName="SBDATAAC_PET_TYPES" />
 		<createSequence sequenceName="SBDATAAC_PETS_PET_ID_SEQ"
 			startValue="1" />
-		<rollback>
-			<dropForeignKeyConstraint baseTableName="SBDATAAC_PETS"
-				constraintName="SBDATAAC_PETS_PET_TYPES_FK" />
-			<dropSequence sequenceName="SBDATAAC_PETS_PET_ID_SEQ" />
-			<dropTable tableName="SBDATAAC_PETS" />
-		</rollback>
 	</changeSet>
 
-	<changeSet author="cordin" id="plus1inout-v001">
+	<changeSet author="cordin" id="001-plus1inout" runOnChange="true">
 		<comment>Procedimiento de prueba que suma 1 al valor proporcionado</comment>
 		<createProcedure dbms="hsqldb" procedureName="PRC_PLUS1INOUT">
 			CREATE PROCEDURE PRC_PLUS1INOUT
@@ -61,9 +51,12 @@
 			SET res = arg + 1;
 			END
 		</createProcedure>
+		<rollback>
+			<dropProcedure procedureName="PRC_PLUS1INOUT"/>
+		</rollback>
 	</changeSet>
 
-	<changeSet author="cordin" id="plus2inout-v001">
+	<changeSet author="cordin" id="001-plus2inout" runOnChange="true">
 		<comment>Procedimiento de prueba que suma 2 al valor proporcionado</comment>
 		<createProcedure dbms="hsqldb" procedureName="PRC_PLUS2INOUT">
 			CREATE PROCEDURE PRC_PLUS2INOUT
@@ -72,10 +65,13 @@
 			SET res = arg + 2;
 			END
 		</createProcedure>
+		<rollback>
+			<dropProcedure procedureName="PRC_PLUS2INOUT"/>
+		</rollback>
 	</changeSet>
 
-	<!-- Creates the tag 'v001-initial-schema' -->
-	<changeSet author="cordin" id="v001-initial-schema" context="devel">
-		<tagDatabase tag="v001-initial-schema" />
+	<!-- Creates the tag '001-initial-schema' -->
+	<changeSet author="cordin" id="001-tag">
+		<tagDatabase tag="001-initial-schema" />
 	</changeSet>
 </databaseChangeLog>

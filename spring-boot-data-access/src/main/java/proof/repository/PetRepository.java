@@ -20,10 +20,10 @@ public interface PetRepository extends JpaRepository<Pet, Long>, PetRepositoryCu
 	@Query("SELECT pet FROM Pet pet")
 	List<Pet> findAllUsingEntityGraph() throws DataAccessException;
 	
-	@Query(value = "SELECT * FROM PETS", nativeQuery = true)
+	@Query(value = "SELECT * FROM SBDATAAC_PETS", nativeQuery = true)
 	List<Pet> findAllUsingNativeQuery() throws DataAccessException;
 	
-	@Query(value = "SELECT pet.*, type.id AS typeid, type.name as typename FROM PETS pet INNER JOIN PET_TYPES type ON pet.type_id=type.id", nativeQuery = true)
+	@Query(value = "SELECT pet.*, type.PET_TYPE_ID AS typeid, type.NAME as typename FROM SBDATAAC_PETS pet INNER JOIN SBDATAAC_PET_TYPES type ON pet.PET_TYPE_ID=type.PET_TYPE_ID", nativeQuery = true)
 	List<Object[]> findAllUsingJoinAndNativeQuery() throws DataAccessException;
 	
 	//
@@ -32,7 +32,7 @@ public interface PetRepository extends JpaRepository<Pet, Long>, PetRepositoryCu
 	
 	// Using @NamedStoredProcedureQuery
 	
-	@Procedure("plus1inout")
+	@Procedure("PRC_PLUS1INOUT")
 	Integer namedProcedure(Integer arg);
 	
 	@Procedure(name = "Pet.plus1")
@@ -43,9 +43,10 @@ public interface PetRepository extends JpaRepository<Pet, Long>, PetRepositoryCu
 	
 	// Direct procedure call
 	
-	@Procedure("plus2inout")
+	@Procedure("PRC_PLUS2INOUT")
 	Integer notNamedProcedure(@Param("arg") Integer arg);
 	
+	// Method name equal to procedure name replacing camelcase with underscores
 	@Procedure()
-	Integer plus2inout(@Param("arg") Integer arg);
+	Integer prc_plus2inout(@Param("arg") Integer arg);
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<!-- Acrónimo de la aplicación: SBDATAAC -->
+
+	<changeSet author="cordin" id="002-pet_types-data">
+		<insert tableName="SBDATAAC_PET_TYPES">
+			<column name="PET_TYPE_ID" value="1"/>
+			<column name="NAME" value="cat"/>
+		</insert>		
+		<insert tableName="SBDATAAC_PET_TYPES">
+			<column name="PET_TYPE_ID" value="2"/>
+			<column name="NAME" value="dog"/>
+		</insert>		
+		<insert tableName="SBDATAAC_PET_TYPES">
+			<column name="PET_TYPE_ID" value="3"/>
+			<column name="NAME" value="lizard"/>
+		</insert>		
+		<insert tableName="SBDATAAC_PET_TYPES">
+			<column name="PET_TYPE_ID" value="4"/>
+			<column name="NAME" value="snake"/>
+		</insert>		
+		<insert tableName="SBDATAAC_PET_TYPES">
+			<column name="PET_TYPE_ID" value="5"/>
+			<column name="NAME" value="bird"/>
+		</insert>		
+		<insert tableName="SBDATAAC_PET_TYPES">
+			<column name="PET_TYPE_ID" value="6"/>
+			<column name="NAME" value="hamster"/>
+		</insert>
+		<rollback>
+			<delete tableName="SBDATAAC_PET_TYPES">
+				<where>PET_TYPE_ID IN (1,2,3,4,5,6)</where>
+			</delete>
+		</rollback>	
+	</changeSet>
+
+</databaseChangeLog>

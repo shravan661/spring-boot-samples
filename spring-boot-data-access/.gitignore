@@ -4,3 +4,6 @@ mvn*
 .project
 .settings
 target
+spring-boot-data-access-db.log
+spring-boot-data-access-db.properties
+spring-boot-data-access-db.script

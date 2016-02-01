@@ -13,13 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import proof.SpringBootDataAccessApplication;
 import proof.model.Pet;
 import proof.model.PetType;
-import proof.repository.PetRepository;
-import proof.repository.PetTypeRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpringBootDataAccessApplication.class)
@@ -152,12 +154,28 @@ public class PetRepositoryIntegrationTest {
 	@Test
 	public void testNotNamedProcedure2() throws Exception {
 		LOG.debug("TEST Calling a not named procedure 2 by its database name");
-		assertEquals(new Integer(3), repository.plus2inout(1));
+		assertEquals(new Integer(3), repository.prc_plus2inout(1));
 	}
 
 	@Test
 	public void testLogging() throws Exception {
 		LOG.debug("TEST logging usage with parameters value1={}, value2={}", 10, 20);
+	}
+
+	@Test
+	public void testPage() throws Exception {
+		LOG.debug("TEST query data pagination");
+		
+		Sort sortById = new Sort(Direction.ASC, "id");
+		Sort sortByName = new Sort(Direction.ASC, "name");
+				
+		Page<Pet> findAllPets = repository.findAll(new PageRequest(0, 4, sortById));
+		assertNotNull(findAllPets);
+		assertEquals(4, findAllPets.getSize());
+		
+		findAllPets = repository.findAll(new PageRequest(0, 4, sortByName.and(sortById)));
+		assertNotNull(findAllPets);
+		assertEquals(4, findAllPets.getSize());
 	}
 
 }
