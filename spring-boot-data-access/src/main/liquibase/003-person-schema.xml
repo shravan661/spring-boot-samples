@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<!-- Acrónimo de la aplicación: SBDATAAC -->
+
+	<changeSet author="cordin" id="003-person">
+		<comment>Table for persons</comment>
+		<createTable tableName="SBDATAAC_PERSONS">
+			<column name="PERSON_ID" type="BIGINT" remarks="Identifier">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="SBDATAAC_PERSON_PK" />
+			</column>
+			<column name="NAME" type="java.sql.Types.VARCHAR(255)"
+				remarks="Person name" />
+		</createTable>
+		<createSequence sequenceName="SBDATAAC_PERSONS_PERSON_ID_SEQ"
+			startValue="1" />
+	</changeSet>
+
+	<!-- Creates the tag '003-person-schema' -->
+	<changeSet author="cordin" id="003-tag">
+		<tagDatabase tag="003-person-schema" />
+	</changeSet>
+</databaseChangeLog>

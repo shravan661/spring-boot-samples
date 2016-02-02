@@ -38,4 +38,8 @@
 		</rollback>	
 	</changeSet>
 
+	<!-- Creates the tag '002-pet-types-data' -->
+	<changeSet author="cordin" id="002-tag">
+		<tagDatabase tag="002-pet-types-data" />
+	</changeSet>
 </databaseChangeLog>

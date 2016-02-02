@@ -42,7 +42,7 @@
 			startValue="1" />
 	</changeSet>
 
-	<changeSet author="cordin" id="001-plus1inout" runOnChange="true">
+	<!--changeSet author="cordin" id="001-plus1inout" runOnChange="true">
 		<comment>Procedimiento de prueba que suma 1 al valor proporcionado</comment>
 		<createProcedure dbms="hsqldb" procedureName="PRC_PLUS1INOUT">
 			CREATE PROCEDURE PRC_PLUS1INOUT
@@ -68,7 +68,7 @@
 		<rollback>
 			<dropProcedure procedureName="PRC_PLUS2INOUT"/>
 		</rollback>
-	</changeSet>
+	</changeSet-->
 
 	<!-- Creates the tag '001-initial-schema' -->
 	<changeSet author="cordin" id="001-tag">

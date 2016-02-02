@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<liquibase.version>3.4.2</liquibase.version>
+		<properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -81,16 +82,36 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>${properties-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>src/main/resources/application.properties</file>
+								<file>src/main/resources/application-devel.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase.version}</version>
 				<configuration>
 					<changeLogFile>src/main/liquibase/master.xml</changeLogFile>
 					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-					<url>jdbc:hsqldb:file:spring-boot-data-access-db</url>
-					<username>SA</username>
-					<password></password>
-					<driver>org.hsqldb.jdbc.JDBCDriver</driver>
+					<url>${spring.datasource.url}</url>
+					<username>${spring.datasource.username}</username>
+					<password>${spring.datasource.password}</password>
+					<driver>${spring.datasource.driver-class-name}</driver>
 				</configuration>
 			</plugin>
 		</plugins>

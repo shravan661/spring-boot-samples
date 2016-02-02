@@ -6,6 +6,7 @@
 
 	<include file="001-initial-schema.xml" relativeToChangelogFile="true" />
 	<include file="002-pet-types-data.xml" relativeToChangelogFile="true" />
+	<include file="003-person-schema.xml" relativeToChangelogFile="true" />
 
 	<include file="sample/sample-data.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
