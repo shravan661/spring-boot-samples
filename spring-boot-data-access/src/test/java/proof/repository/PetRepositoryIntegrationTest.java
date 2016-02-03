@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import proof.SpringBootDataAccessApplication;
 import proof.model.Pet;
+import proof.model.PetNameBirthDate;
 import proof.model.PetType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -176,6 +177,14 @@ public class PetRepositoryIntegrationTest {
 		findAllPets = repository.findAll(new PageRequest(0, 4, sortByName.and(sortById)));
 		assertNotNull(findAllPets);
 		assertEquals(4, findAllPets.getSize());
+	}
+	
+	@Test
+	public void testProjection() {
+		LOG.debug("TEST find Pets using PetNameBirthDate projection");
+		
+		List<PetNameBirthDate> pets = repository.findAllNameAndBirthDate();
+		assertEquals(13, pets.size());
 	}
 
 }

@@ -6,12 +6,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
 import com.mysema.query.BooleanBuilder;
+import com.mysema.query.types.ConstructorExpression;
 
 import proof.model.Pet;
+import proof.model.PetNameBirthDate;
 import proof.model.QPet;
 
-public class PetRepositoryImpl extends QueryDslRepositorySupport
-implements PetRepositoryCustom {
+public class PetRepositoryImpl extends QueryDslRepositorySupport implements PetRepositoryCustom {
 
 	public PetRepositoryImpl() {
 		super(Pet.class);
@@ -28,12 +29,18 @@ implements PetRepositoryCustom {
 		if (dateFirst != null && (dateLast == null || dateFirst.before(dateLast))) {
 			where.and(pet.birthDate.after(dateFirst));
 		}
-		
+
 		if (dateLast != null) {
 			where.and(pet.birthDate.before(dateLast));
 		}
-		
+
 		return from(pet).where(where).innerJoin(pet.type).fetch().list(pet);
 	}
 
+	@Override
+	public List<PetNameBirthDate> findAllNameAndBirthDate() {
+		QPet pet = QPet.pet;
+		return from(pet).list(ConstructorExpression.create(PetNameBirthDate.class, 
+				pet.name, pet.birthDate));
+	}
 }
