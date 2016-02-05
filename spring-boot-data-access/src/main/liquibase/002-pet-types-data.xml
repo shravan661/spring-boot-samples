@@ -9,26 +9,32 @@
 	<changeSet author="cordin" id="002-pet_types-data">
 		<insert tableName="SBDATAAC_PET_TYPES">
 			<column name="PET_TYPE_ID" value="1"/>
+			<column name="VERSION" value="0"/>
 			<column name="NAME" value="cat"/>
 		</insert>		
 		<insert tableName="SBDATAAC_PET_TYPES">
 			<column name="PET_TYPE_ID" value="2"/>
+			<column name="VERSION" value="0"/>
 			<column name="NAME" value="dog"/>
 		</insert>		
 		<insert tableName="SBDATAAC_PET_TYPES">
 			<column name="PET_TYPE_ID" value="3"/>
+			<column name="VERSION" value="0"/>
 			<column name="NAME" value="lizard"/>
 		</insert>		
 		<insert tableName="SBDATAAC_PET_TYPES">
 			<column name="PET_TYPE_ID" value="4"/>
+			<column name="VERSION" value="0"/>
 			<column name="NAME" value="snake"/>
 		</insert>		
 		<insert tableName="SBDATAAC_PET_TYPES">
 			<column name="PET_TYPE_ID" value="5"/>
+			<column name="VERSION" value="0"/>
 			<column name="NAME" value="bird"/>
 		</insert>		
 		<insert tableName="SBDATAAC_PET_TYPES">
 			<column name="PET_TYPE_ID" value="6"/>
+			<column name="VERSION" value="0"/>
 			<column name="NAME" value="hamster"/>
 		</insert>
 		<rollback>

@@ -13,6 +13,8 @@
 				<constraints nullable="false" primaryKey="true"
 					primaryKeyName="SBDATAAC_PET_TYPES_PK" />
 			</column>
+			<column name="VERSION" type="BIGINT" 
+				remarks="Row version for optimistic locking"/>
 			<column name="NAME" type="java.sql.Types.VARCHAR(255)"
 				remarks="Pet type name" />
 		</createTable>
@@ -27,6 +29,8 @@
 				<constraints nullable="false" primaryKey="true"
 					primaryKeyName="SBDATAAC_PETS_PK" />
 			</column>
+			<column name="VERSION" type="BIGINT" 
+				remarks="Row version for optimistic locking"/>
 			<column name="BIRTH_DATE" type="DATE" remarks="Pet birth date" />
 			<column name="NAME" type="java.sql.Types.VARCHAR(255)"
 				remarks="Pet name" />

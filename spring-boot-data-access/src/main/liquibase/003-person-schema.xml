@@ -4,7 +4,11 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-	<!-- Acrónimo de la aplicación: SBDATAAC -->
+	<!-- Acrónimo de la aplicación: SBDATAAC 
+	
+	Ejemplo de changelog adicional de liquibase para hacer pruebas, 
+	sin entidad en la aplicación
+	-->
 
 	<changeSet author="cordin" id="003-person">
 		<comment>Table for persons</comment>
@@ -13,6 +17,8 @@
 				<constraints nullable="false" primaryKey="true"
 					primaryKeyName="SBDATAAC_PERSON_PK" />
 			</column>
+			<column name="VERSION" type="BIGINT" 
+				remarks="Row version for optimistic locking"/>
 			<column name="NAME" type="java.sql.Types.VARCHAR(255)"
 				remarks="Person name" />
 		</createTable>

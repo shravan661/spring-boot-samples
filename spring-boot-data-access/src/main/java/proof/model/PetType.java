@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "SBDATAAC_PET_TYPES")
@@ -17,6 +18,10 @@ public class PetType {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_type_seq")
 	@SequenceGenerator(name = "pet_type_seq", sequenceName = "SBDATAAC_PET_TYPES_PET_TYPE_ID_SEQ")
 	protected Long id;
+	
+	@Version
+	@Column(name = "VERSION")
+	private long version;
 
 	@Column(name = "NAME")
 	private String name;
@@ -27,6 +32,14 @@ public class PetType {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+    public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 	public String getName() {

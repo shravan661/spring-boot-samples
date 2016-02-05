@@ -18,6 +18,7 @@ import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,7 +35,11 @@ public class Pet {
 	@Column(name = "PET_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_seq")
 	@SequenceGenerator(name = "pet_seq", sequenceName = "SBDATAAC_PETS_PET_ID_SEQ")
-	protected Long id;
+	private Long id;
+	
+	@Version
+	@Column(name = "VERSION")
+	private long version;
 	
 	@Column(name = "NAME")
 	private String name;
@@ -56,7 +61,15 @@ public class Pet {
 	    this.id = id;
 	}
 
-    public String getName() {
+    public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+	public String getName() {
         return this.name;
     }
 
