@@ -1,9 +1,10 @@
 package proof.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import proof.model.PetType;
 
-public interface PetTypeRepository extends JpaRepository<PetType, Long> {
+@Transactional(readOnly = true)
+public interface PetTypeRepository extends ReadOnlyRepository<PetType, Long> {
     // Nothing to add
 }

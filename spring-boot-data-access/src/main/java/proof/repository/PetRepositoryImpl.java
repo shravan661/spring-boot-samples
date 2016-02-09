@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.ConstructorExpression;
@@ -12,6 +13,7 @@ import proof.model.Pet;
 import proof.model.PetNameBirthDate;
 import proof.model.QPet;
 
+@Transactional(readOnly = true)
 public class PetRepositoryImpl extends QueryDslRepositorySupport implements PetRepositoryCustom {
 
 	public PetRepositoryImpl() {
