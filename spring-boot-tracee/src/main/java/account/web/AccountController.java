@@ -16,6 +16,8 @@
  */
 package account.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ import account.service.AccountService;
 import io.tracee.Tracee;
 import io.tracee.TraceeBackend;
 import io.tracee.TraceeConstants;
+import io.tracee.Utilities;
 
 @Controller
 class AccountController {
@@ -49,18 +52,19 @@ class AccountController {
     public @ResponseBody Account getAccount(@RequestParam String number) {
         Account account = accountService.findOne(number);
         TraceeBackend backend = Tracee.getBackend();
+        // create session if is necessary
+        Utilities.generateSessionIdIfNecessary(backend, "1234");
         // Try to get the variable 'NUMBER'. Check that the variable is not 
         // passed between different 'sessions' of TracEE
         if(Tracee.getBackend().get("NUMBER") != null){
-          LOG.error("*** NUMBER: ".concat(backend.get("NUMBER")));
+          LOG.error("*** NUMBER: {}",backend.get("NUMBER"));
         }
         // put variable 'NUMBER' inside backend
         backend.put("NUMBER", "1234");     
-        LOG.info("Account found: ".concat(account.toString()));
-        // Get invocation Id
-        String invocationId = backend.get(TraceeConstants.INVOCATION_ID_KEY);
-        LOG.error("*** Get Account invocationId: ".concat(invocationId));
-        LOG.error("Account found: ".concat(account.toString()));
+        // Get invocation Id and session Id
+        LOG.error("*** Get Account invocationId: {} ",backend.get(TraceeConstants.INVOCATION_ID_KEY));
+        LOG.error("*** Get Account sessionId: {} ",backend.get(TraceeConstants.SESSION_ID_KEY));
+        LOG.error("Account found: {}",account.toString());
         return account;
     }
     
@@ -76,12 +80,11 @@ class AccountController {
         // put variable 'NUMBER' inside backend
         backend.put("NUMBER", "5678");     
         Account account = accountService.findOne(number);        
-        LOG.info("Account found: ".concat(account.toString()));
-        // Get invocation Id
-        String invocationId = backend.get(TraceeConstants.INVOCATION_ID_KEY);
-        LOG.error("*** Get Account 2 invocationId: ".concat(invocationId));
-        LOG.error("Account found: ".concat(account.toString()));
-        return account;
+        // Get invocation Id and session Id
+        LOG.error("*** Get Account 2 invocationId: {} ",backend.get(TraceeConstants.INVOCATION_ID_KEY));
+        LOG.error("*** Get Account 2 sessionId: {} ",backend.get(TraceeConstants.SESSION_ID_KEY));
+        LOG.error("Account found: {}",account.toString());
+         return account;
     }
     
 

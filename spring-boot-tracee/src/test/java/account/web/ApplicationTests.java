@@ -1,5 +1,8 @@
 package account.web;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Map;
 
 import org.junit.Test;
@@ -17,10 +20,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import account.Application;
 import io.tracee.Tracee;
-import io.tracee.TraceeConstants;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import io.tracee.TraceeBackend;
+import io.tracee.Utilities;
 
 /**
  * Basic integration tests for demo application.
@@ -38,6 +39,7 @@ public class ApplicationTests {
 
 	@Value("${local.server.port}")
 	private int port;
+	
 	
 	@Test
 	public void testHome() throws Exception {
@@ -73,7 +75,7 @@ public class ApplicationTests {
     assertEquals("1111", body.get("number"));
         assertNotNull(body.get("id"));
         assertNotNull(body.get("creditCardNumber"));
-    LOG.info("End testHome()");
+    LOG.info("End testHome2()");
   }
 
 }

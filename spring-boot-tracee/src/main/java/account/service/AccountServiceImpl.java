@@ -61,11 +61,11 @@ public class AccountServiceImpl implements AccountService {
         LOG.info("New Account: ".concat(account.toString()));
         // Try to get the variable 'NUMBER' 
         if(Tracee.getBackend().get("NUMBER") != null){
-          LOG.error("*** NUMBER: ".concat(Tracee.getBackend().get("NUMBER")));
+          LOG.error("*** NUMBER: {}",Tracee.getBackend().get("NUMBER"));
         }
-        // Get invocation Id
-        String invocationId = Tracee.getBackend().get(TraceeConstants.INVOCATION_ID_KEY);
-        LOG.error("**** findOne invocationId ".concat(invocationId));
+        // Get invocation Id and session Id
+        LOG.error("**** findOne invocationId {}", Tracee.getBackend().get(TraceeConstants.INVOCATION_ID_KEY));
+        LOG.error("**** findOne sessionId {}", Tracee.getBackend().get(TraceeConstants.SESSION_ID_KEY));
         return account;
     }
 

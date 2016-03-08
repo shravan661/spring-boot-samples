@@ -59,6 +59,33 @@
           <artifactId>tracee-springmvc</artifactId>
           <version>1.1.2</version> <!-- You should specify a version instead -->
         </dependency>
+        
+       <!--  <dependency>
+          <groupId>io.tracee.contextlogger</groupId>
+          <artifactId>contextlogger-core</artifactId>
+          <version>0.11.0</version>
+        </dependency>
+        dependency for annotation processing at compile time
+    <dependency>
+      <groupId>io.tracee.contextlogger.contextprovider</groupId>
+      <artifactId>contextprovider-annotationprocessor</artifactId>
+      <version>0.11.0</version>
+    </dependency>
+        <dependency>
+      <groupId>io.tracee.contextlogger.contextprovider</groupId>
+      <artifactId>contextprovider-servlet-core</artifactId>
+      <version>0.11.0</version>
+    </dependency>
+        <dependency>
+      <groupId>io.tracee.contextlogger.contextprovider</groupId>
+      <artifactId>contextprovider-api</artifactId>
+      <version>0.11.0</version>
+    </dependency>
+      <dependency>
+      <groupId>io.tracee.contextlogger.contextprovider</groupId>
+      <artifactId>contextprovider-springmvc</artifactId>
+      <version>0.11.0</version>
+    </dependency> -->
 
     </dependencies>
 
@@ -98,6 +125,7 @@
                     <overview>src/main/java/overview.adoc</overview>
                 </configuration>
             </plugin>
+            
         </plugins>
     </build>
 

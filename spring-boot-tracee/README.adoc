@@ -7,7 +7,7 @@ http://stackoverflow.com/questions/34525967/spring-boot-exception-could-not-open
 and make an example of use of TracEE
 
 == Setting up the build environment
-
+ EX
 Import this project as "External Maven project" in STS 3.7.
 
 == Run Tests
