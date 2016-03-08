@@ -46,7 +46,7 @@ public interface PetRepository extends JpaRepository<Pet, Long>, PetRepositoryCu
 	// Direct procedure call
 	
 	@Procedure("PRC_PLUS2INOUT")
-	Integer notNamedProcedure(@Param("arg") Integer arg);
+	Integer getValuePlus2(@Param("arg") Integer arg);
 	
 	// Method name equal to procedure name replacing camelcase with underscores
 	@Procedure()

@@ -149,7 +149,7 @@ public class PetRepositoryIntegrationTest {
 	@Test
 	public void testNotNamedProcedure() throws Exception {
 		LOG.debug("TEST Calling a not named procedure by its database name");
-		assertEquals(new Integer(3), repository.notNamedProcedure(1));
+		assertEquals(new Integer(3), repository.getValuePlus2(1));
 	}
 
 	@Test

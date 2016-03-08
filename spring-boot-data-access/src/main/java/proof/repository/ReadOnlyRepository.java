@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Provides default query methods for Read Only entities, for example for mapped
@@ -24,6 +25,7 @@ import org.springframework.data.repository.Repository;
  * @author Cèsar Ordiñana
  */
 @NoRepositoryBean
+@Transactional(readOnly = true)
 public interface ReadOnlyRepository<T, ID extends Serializable> extends Repository<T, ID> {
 
 	/**
