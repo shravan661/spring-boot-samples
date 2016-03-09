@@ -2,17 +2,17 @@
 <!DOCTYPE configuration>
 
 <configuration>
-  
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %X{TPIC.sessionId} - %X{TPIC.invocationId} - %msg%n</pattern>
-    </encoder>
-    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>INFO</level>
-    </filter>
-  </appender>
 
-	<root level="INFO">
-		<appender-ref ref="CONSOLE" />
-	</root>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-25(%d{YYYY-MM-DD HH:mm:ss} %level) [TPID:%X{TPIC.invocationId}] %msg %class %file%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
 </configuration>
