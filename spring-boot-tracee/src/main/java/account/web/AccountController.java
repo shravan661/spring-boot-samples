@@ -16,7 +16,9 @@
  */
 package account.web;
 
-import javax.servlet.http.HttpSession;
+import io.tracee.Tracee;
+import io.tracee.TraceeBackend;
+import io.tracee.TraceeConstants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,73 +33,51 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import account.domain.Account;
 import account.service.AccountService;
-import io.tracee.Tracee;
-import io.tracee.TraceeBackend;
-import io.tracee.TraceeConstants;
-import io.tracee.Utilities;
 
 @Controller
 class AccountController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
-    @Autowired
-    protected AccountService accountService;
+  @Autowired
+  protected AccountService accountService;
 
-    /**
-     * See section `Run Tests` at README.adoc to learn how to test.
-     */
-    @RequestMapping(value="/accounts", produces="application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody Account getAccount(@RequestParam String number) {
-        Account account = accountService.findOne(number);
-        TraceeBackend backend = Tracee.getBackend();
-        // create session if is necessary
-        Utilities.generateSessionIdIfNecessary(backend, "1234");
-        // Try to get the variable 'NUMBER'. Check that the variable is not 
-        // passed between different 'sessions' of TracEE
-        if(Tracee.getBackend().get("NUMBER") != null){
-          LOG.error("*** NUMBER: {}",backend.get("NUMBER"));
-        }
-        // put variable 'NUMBER' inside backend
-        backend.put("NUMBER", "1234");     
-        // Get invocation Id and session Id
-        LOG.error("*** Get Account invocationId: {} ",backend.get(TraceeConstants.INVOCATION_ID_KEY));
-        LOG.error("*** Get Account sessionId: {} ",backend.get(TraceeConstants.SESSION_ID_KEY));
-        LOG.error("Account found: {}",account.toString());
-        return account;
-    }
-    
-    /**
-     * See section `Run Tests` at README.adoc to learn how to test.
-     * 
-     * In this method put parameter into backend before to call findOne method.
-     */
-    @RequestMapping(value="/accounts2", produces="application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody Account getAccount2(@RequestParam String number) {
-        TraceeBackend backend = Tracee.getBackend();
-        // put variable 'NUMBER' inside backend
-        backend.put("NUMBER", "5678");     
-        Account account = accountService.findOne(number);        
-        // Get invocation Id and session Id
-        LOG.error("*** Get Account 2 invocationId: {} ",backend.get(TraceeConstants.INVOCATION_ID_KEY));
-        LOG.error("*** Get Account 2 sessionId: {} ",backend.get(TraceeConstants.SESSION_ID_KEY));
-        LOG.error("Account found: {}",account.toString());
-         return account;
-    }
-    
+  /**
+   * See section `Run Tests` at README.adoc to learn how to test.
+   */
+  @RequestMapping(value = "/accounts", produces = "application/json")
+  @ResponseStatus(HttpStatus.OK)
+  public @ResponseBody Account getAccount(@RequestParam String number) {
 
-    /**
-     * See section `Run Tests` at README.adoc to learn how to test.
-     */
-    @RequestMapping(value="/accounts")
-    public String getAccount(@RequestParam String number, Model model) {
-        Account account = accountService.findOne(number);
+    LOG.info("GET Account");
 
-        model.addAttribute( account );
+    Account account = accountService.findOne(number);
 
-        // Return the view to use for rendering the response
-        return "accounts/show";
-    }
+    LOG.error("RESPONSE Account: {}", account.toString());
+    return account;
+  }
+
+  /**
+   * See section `Run Tests` at README.adoc to learn how to test.
+   */
+  @RequestMapping(value = "/accounts2", produces = "application/json")
+  @ResponseStatus(HttpStatus.OK)
+  public @ResponseBody Account getAccount2(@RequestParam String number) {
+    Account account = accountService.findOne(number);
+    return account;
+  }
+
+
+  /**
+   * See section `Run Tests` at README.adoc to learn how to test.
+   */
+  @RequestMapping(value = "/accounts")
+  public String getAccount(@RequestParam String number, Model model) {
+    Account account = accountService.findOne(number);
+
+    model.addAttribute(account);
+
+    // Return the view to use for rendering the response
+    return "accounts/show";
+  }
 }
