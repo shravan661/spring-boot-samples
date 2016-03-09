@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import account.domain.Account;
-import io.tracee.Tracee;
-import io.tracee.TraceeConstants;
 
 /**
  * = Javadoc in Asciidoc
@@ -59,13 +57,7 @@ public class AccountServiceImpl implements AccountService {
         account.setCreditCardNumber("1111 1111 1111 1111");
 
         LOG.info("New Account: ".concat(account.toString()));
-        // Try to get the variable 'NUMBER' 
-        if(Tracee.getBackend().get("NUMBER") != null){
-          LOG.error("*** NUMBER: {}",Tracee.getBackend().get("NUMBER"));
-        }
-        // Get invocation Id and session Id
-        LOG.error("**** findOne invocationId {}", Tracee.getBackend().get(TraceeConstants.INVOCATION_ID_KEY));
-        LOG.error("**** findOne sessionId {}", Tracee.getBackend().get(TraceeConstants.SESSION_ID_KEY));
+
         return account;
     }
 
