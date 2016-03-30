@@ -11,8 +11,6 @@ http://stackoverflow.com/questions/34525967/spring-boot-exception-could-not-open
 
 Spring Boot Legacy is not deployed on Maven Central so you have build and install it in your Maven local repository.
 
-. Clone the Spring Boot Legacy repository
-+
 [source,bash]
 ----
 $ cd SBL_DIR
