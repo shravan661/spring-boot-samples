@@ -7,6 +7,7 @@ template engine as independent library.
 
 This proof has the following structure:
 
+```
 .
 ├── pom.xml
 ├── README.adoc
@@ -35,6 +36,7 @@ This proof has the following structure:
     └── test
         ├── java
         └── resources
+```
 
 * *Main.java* contains the main method where *show.html* view is generated
   using FreeMarker template engines.
@@ -50,6 +52,6 @@ This proof has the following structure:
 Follow these next steps to execute application to generate *show.html* view
 based on the templates contents.
 
-#. Checkout this project
-#. Execute ```mvn clean compile exec:java -D exec.mainClass=proof.Main```
-#. Check that *show.html* view has been generated inside the project folder.
+1. Checkout this project
+2. Execute ```mvn clean compile exec:java -D exec.mainClass=proof.Main```
+3. Check that *show.html* view has been generated inside the project folder.
