@@ -6,12 +6,12 @@
   </head>
   <body>
     <!--
-    Sólo el contenido interno del siguiente div se incluirá dentro de la
-    plantilla, en el apartado menu
+    Only the internal content of the following div is included within
+    the template, in menu fragment
     -->
     <div data-layout-fragment="menu">
 
-        <!-- MENU PRINCIPAL -->
+        <!-- Main navbar -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container">
 
@@ -23,35 +23,36 @@
                 <span class="icon-bar"></span>
               </button>
 
-              <!-- brand logo -->
+              <!-- Brand logo -->
               <div class="organization-logo navbar-brand">
                 <a title="Spring Roo Application" href="http://projects.spring.io/spring-roo/">
                   <img alt="Spring Roo Application" data-th-src="@{/public/img/logo.png}" src="../../static/public/img/logo.png" />
                 </a>
               </div>
-              <!-- name application -->
+              <!-- Name application -->
               <div class="application-name navbar-brand hidden-xs"><a href="/" data-th-href="@{/}">Spring Roo Application</a></div>
 
-            </div><!-- navbar header -->
+            </div><!-- /navbar-header -->
 
             <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse">
 
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Menú 1 activo</a></li>
-                <li><a href="#">Menú 2</a></li>
+                <li class="active"><a href="#">Menu 1 active</a></li>
+                <li><a href="#">Menu 2</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menú 3 desplegable<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu 3 dropdown<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Submenú 1</a></li>
-                    <li><a href="#">Submenú 2</a></li>
-                    <li><a href="#">Submenú 3</a></li>
+                    <li><a href="#">Submenu 1</a></li>
+                    <li><a href="#">Submenu 2</a></li>
+                    <li><a href="#">Submenu 3</a></li>
                   </ul>
                 </li>
               </ul>
 
-              <!-- USER MENU -->
+              <!-- Menu -->
               <div data-layout-include="fragments/session-links :: session">
-                <span>Datos de sesión del usuario</span>
+                <!-- Content replaced by the session template fragment session-links.html -->
+                <span>User session data</span>
               </div>
 
            </div>

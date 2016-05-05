@@ -15,7 +15,6 @@
     <link rel="apple-touch-icon" href="../../static/public/img/apple-touch-icon.png"
       data-th-href="@{/public/img/apple-touch-icon.png}" />
 
-    <!--/*  El título final será la unión del título en el layout más el título de la página. */-->
     <title data-layout-title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Spring Roo application</title>
 
     <!-- Bootstrap -->
@@ -23,21 +22,20 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"
       data-th-href="@{/webjars/bootstrap/3.3.6/dist/css/bootstrap.css}"></link>
 
-    <!-- FONT AWESOME -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css"
       href="../../static/public/css/font-awesome.min.css"
       data-th-href="@{/public/css/font-awesome.min.css}" />
 
-    <!-- CUSTOM Bootswatch CSS -->
+    <!-- Bootswatch CSS custom -->
     <link rel="stylesheet" type="text/css"
       href="../../static/public/css/theme.css"
       data-th-href="@{/public/css/theme.css}" />
 
-     <!-- ROO CSS -->
+    <!-- Roo CSS -->
     <link rel="stylesheet" type="text/css"
       href="../../static/public/css/springroo.css"
       data-th-href="@{/public/css/springroo.css}" />
-
 
     <!-- HTML5 shim y Respond.js para soporte de elementos HTML5 en IE8 y media queries -->
     <!--[if lt IE 9]>
@@ -50,14 +48,13 @@
 
      <header role="banner">
         <div data-layout-include="fragments/header :: header">
-          <!-- Contenido sustituido por el fragmento header de la plantilla header.html -->
-          <h1>Cabecera de página de ejemplo para visualización directa de la
-            plantilla</h1>
+          <!-- Content replaced by the header template fragment header.html -->
+          <h1>Sample page header for direct display of the template</h1>
         </div>
 
         <div data-layout-include="fragments/menu :: menu">
-          <!-- Contenido sustituido por el fragmento menu de la plantilla menu.html -->
-          <span>Menú de la Aplicación</span>
+          <!-- Content replaced by the menu template fragment menu.html -->
+          <span>Application menu</span>
         </div>
 
     </header>
@@ -66,9 +63,8 @@
 
 
       <section data-layout-fragment="content">
-        <!-- Contenido sustituido por el fragmento content de la página que se visualiza -->
-        <h2>Cuerpo de página estático para para visualización directa de la
-          plantilla</h2>
+        <!-- Content replaced by the content fragment of the page displayed -->
+        <h2>Sample static body for direct display of the template</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
           scelerisque neque neque, ac elementum quam dignissim interdum. Phasellus et
           placerat elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -78,14 +74,12 @@
     </div>
 
     <footer class="container" data-layout-include="fragments/footer :: footer">
-      <!-- Contenido sustituido por el fragmento footer de la plantilla footer.html -->
-      &copy; 2016 Spring Roo (pie de página de ejemplo para la visualización directa de
-      la plantilla)
+      <!-- Content replaced by the footer template fragment footer.html -->
+      &copy; 2016 Spring Roo (footer for example for direct display of the template)
     </footer>
 
     <!-- JavaScript
       ================================================== -->
-    <!-- Ubicado al final del documento para que las páginas carguen más rápido -->
     <!-- JQuery -->
     <script type="text/javascript" charset="utf8"
       src="https://code.jquery.com/jquery-1.12.3.js"
@@ -102,7 +96,7 @@
       </script>
 
     <div data-layout-fragment="javascript">
-      <!-- Se incluye aquí el código javascript propio de cada página -->
+      <!-- This includes javascript own code of each page -->
     </div>
 
     <!-- Application -->
