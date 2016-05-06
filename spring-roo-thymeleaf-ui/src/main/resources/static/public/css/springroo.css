@@ -47,10 +47,10 @@ footer {
 	padding: 1em 0 3em;
   text-align: center;
 	}
-footer p{ 
+footer p{
 	font-size: 0.875em
   }
-  
+
 
 /*--HEADINGS-------------*/
 
@@ -76,17 +76,17 @@ body.home .bg-header{ display: block;}
     min-height: 20em;
     color: #fff;
     text-align: center;
-    padding: 3em;    
+    padding: 3em;
     background-image: url(../img/geo.png);
     background-repeat: no-repeat;
-    background-position: 50% 20%;    
+    background-position: 50% 20%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
-.jumbotron .project-name{   
+.jumbotron .project-name{
   color: #fff;
   text-align: center;
   font-size: 4em;
@@ -113,12 +113,12 @@ body.home .bg-header{ display: block;}
   box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,.1);
 }
 
-body.home .content{ 
+body.home .content{
 	background: none;
 	padding: 0;
 	box-shadow: none;
 	}
-body.home .box-center{ 
+body.home .box-center{
 	padding: 1em 2em;
   background: #fff;
   box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,.1);
@@ -152,11 +152,11 @@ body.home .box-center{
 
 .btn-accion + .btn-accion {
     margin: 0 0 0 0.35em;
-}   
+}
 table a.btn-accion {
     text-decoration: none;
-}    
-    
+}
+
 .btn-accion:hover,.btn-accion:focus, .btn-accion:active {
     background-color: #eeeeee;
     border-color: #e2e2e2;
@@ -173,10 +173,10 @@ table a.btn-accion {
 .btn-accion.eliminar:before {
   content:"\f014";
   }
-.btn-accion.editar:before,  
+.btn-accion.editar:before,
 .btn-accion.modificar:before {
   content:"\f040";
-  }  
+  }
 .btn-accion.aceptar:before {
   content:"\f00c";
   }
@@ -187,27 +187,10 @@ table a.btn-accion {
 	content:"\f06e";
 }
 
-/*--ACCIONES-------------*/
-.acciones {}
-.acciones .heading {}
-
-
 /*--TABLES-------------*/
 
-.table-responsive {
-    margin: 0 0 2em;
-    overflow: hidden;
-}
 .table thead {
     background: #EEEEEE;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button{ margin: 0; padding: 0 !important}
-table.dataTable thead th, table.dataTable thead td {
-    padding: 10px 18px;
-    border-bottom: 4px solid #E7E7E7 !important;
-}
-table.dataTable.no-footer {
-    border-bottom: 4px solid #E7E7E7 !important;
 }
 
 table caption {
@@ -215,10 +198,17 @@ table caption {
     font-size: 1.2em;
 }
 
+/*--SHOW-------------*/
+
+dd, dt {
+    margin: 0px 5px 5px 0px;
+}
+
+
 /*--INDEX-------------*/
 
 
-/*--SOCIAL LINKS-------------*/  
+/*--SOCIAL LINKS-------------*/
 
 .social-links a{
   color: #999;
@@ -318,41 +308,52 @@ table caption {
   width: 100%;
 }
 
-/* 
+/*
  * Material Background Colors
  */
 
 .bgm-teal {
   background-color: #009688 !important;
 }
-
 .c-teal {
   color: #009688 !important;
 }
-
 .bgm-red {
   background-color: #f44336 !important;
 }
-
 .c-red {
   color: #f44336 !important;
 }
 
-
 .bgm-amber {
   background-color: #ffc107 !important;
 }
-
 .c-amber {
   color: #ffc107 !important;
 }
-
 .bgm-bluegray {
   background-color: #607d8b !important;
 }
-
 .c-bluegray {
   color: #607d8b !important;
+}
+
+
+/* DATATABLES fixed
+----------------------------------------------------------------------------------------------------*/
+
+
+.table-responsive {
+    margin: 0 0 2em;
+    overflow: hidden;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{ margin: 0; padding: 0 !important}
+table.dataTable thead th, table.dataTable thead td {
+    padding: 10px 18px;
+    border-bottom: 4px solid #E7E7E7 !important;
+}
+table.dataTable.no-footer {
+    border-bottom: 4px solid #E7E7E7 !important;
 }
 
 
