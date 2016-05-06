@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon" href="../../static/public/img/apple-touch-icon.png"
        data-th-remove="all" />
 
-    <title>Spring Roo application</title>
+    <title>Spring Roo application login</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css"
@@ -55,7 +55,7 @@
     <![endif]-->
 
   </head>
-  <body class="home">
+  <body>
 
     <!--Main container-->
     <div class="bg-container">
@@ -65,12 +65,6 @@
 
         <!--Banner -->
         <div class="bg-header">
-          <div class="jumbotron bg-banner">
-              <div class="container">
-                <h1 class="project-name">Hello, we are Spring Roo!</h1>
-                <h2 class="project-tagline">Get start your next awesome project</h2>
-              </div>
-          </div>
         </div>
 
         <!-- Main nav -->
@@ -134,113 +128,63 @@
 
         <div class="container content">
 
-          <div class="box-center">
-
-          <!-- Project info -->
-          <div class="row">
-            <div class="hidden-xs col-sm-4 col-sm-offset-1">
-               <img alt="Spring Roo" data-th-src="@{/public/img/springroo-logo.png}"
-              src="../static/public/img/springroo-logo.png" />
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h1 class="panel-title" data-th-text="#{label_login}">Inicio de
+                sesión</h1>
             </div>
-            <div class="col-sm-6">
-              <h2>With Roo you can easily build full Java applications in minutes.</h2>
+            <div class="panel-body">
+              <form class="form-horizontal" data-th-action="@{/login}" method="post">
 
-              <p>Spring Roo is a next-generation rapid application development tool for Java developers.
-              It focuses on higher productivity, stock-standard Java APIs, high usability, avoiding engineering trade-offs and
-              facilitating easy Roo removal.
-              </p>
+                <fieldset>
+                  <legend class="sr-only">Introduzca su usuario y contraseña</legend>
 
-              <p class="lead">Thanks for your interest in Spring Roo!</p>
+                  <div data-th-if="${param.error}" class="alert alert-danger"
+                    role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span> <span
+                      data-th-text="#{error_login}">Usuario y password no válidos</span>
+                  </div>
 
-              </div>
+                  <div data-th-if="${param.logout}" class="alert alert-success"
+                    role="alert">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <span
+                      data-th-text="#{info_session_closed}"> Sesión cerrada
+                      correctamente</span>
+                  </div>
 
-            </div>
-          </div><!-- box-center -->
-
-         <!-- Features -->
-         <div class="row blocks">
-
-          <!-- Doc -->
-          <div class="col-sm-6 col-md-3">
-            <div class="block-item bgm-teal">
-                <div class="clearfix">
-                    <div class="doc">
-                     <i class="fa fa-book"></i>
+                  <div class="form-group">
+                    <label for="usuario" class="col-md-3 control-label"
+                      data-th-text="#{label_login_username}">Usuario</label>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="username" name="username"
+                        placeholder="Usuario" />
                     </div>
-                    <div class="text">
-                     <h2><a href="http://docs.spring.io/spring-roo/docs/current/reference/html/" title="Spring Roo reference documentation" target="_blank">Doc</a></h2>
-                     <small>If you are looking for Reference Documentation you can get it here.</small>
-                    </div>
-                </div>
-            </div>
-         </div>
+                  </div>
 
-          <!-- Project page -->
-          <div class="col-sm-6 col-md-3">
-              <div class="block-item bgm-red">
-                  <div class="clearfix">
-                      <div class="doc">
-                        <i class="fa fa-envira"></i>
-                      </div>
-                      <div class="text">
-                        <h2><a href="http://projects.spring.io/spring-roo/" title="Spring Roo project site" target="_blank">Project Page</a></h2>
-                        <small>All the info about Spring Roo development.</small>
+                  <div class="form-group">
+                    <label for="password" class="col-md-3 control-label"
+                      data-th-text="#{label_login_password}">Contraseña</label>
+                    <div class="col-md-6">
+                      <input type="password" class="form-control" id="password"
+                        name="password" placeholder="Password" />
                     </div>
-                </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                      <button type="reset" class="btn btn-default"
+                        data-th-text="#{label_reset}">Cancelar</button>
+                      <button type="submit" class="btn btn-primary"
+                        data-th-text="#{label_submit}">Aceptar</button>
+                    </div>
+                  </div>
+                </fieldset>
+
+              </form>
             </div>
+
           </div>
-
-              <!-- Support -->
-              <div class="col-sm-6 col-md-3">
-                  <div class="block-item bgm-amber">
-                      <div class="clearfix">
-                          <div class="doc">
-                                <i class="fa fa-stack-overflow"></i>
-                              </div>
-                              <div class="text">
-                                <h2><a href="http://stackoverflow.com/questions/tagged/spring-roo" title="Spring Roo Stackoverflow support" target="_blank">Support</a></h2>
-                                <small>If you have any question about the project,
-                                you can check it.</small>
-                            </div>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="col-sm-6 col-md-3">
-                  <div class="block-item bgm-bluegray">
-                      <div class="clearfix">
-                         <div class="doc">
-                                <i class="fa fa-code"></i>
-                              </div>
-                              <div class="text">
-                                <h2><a href="https://github.com/spring-projects/spring-roo/" title="Spring Roo source code" target="_blank">Code</a></h2>
-                                <small>Known, modify and redistribute the source code.</small>
-                            </div>
-                      </div>
-                  </div>
-              </div>
-
-           </div><!-- /features -->
-
-
-            <!-- Social -->
-            <div class="row">
-              <div class="col-md-12">
-                <ul class="pull-right list-inline social-links">
-                  <li><small>As always, you can find us also on </small></li>
-                  <li>
-                  <a href="http://twitter.com/springroo" class="icon-twitter" target="_blank">
-                  <i class="fa fa-twitter"></i>
-                  </a>
-                  </li>
-                  <li>
-                  <a href="https://www.linkedin.com/groups/3293132" class="icon-linkedin" target="_blank">
-                  <i class="fa fa-linkedin"></i>
-                  </a>
-                  </li>
-              </ul>
-             </div>
-         </div>
 
         </div>
         <!--/content-->
