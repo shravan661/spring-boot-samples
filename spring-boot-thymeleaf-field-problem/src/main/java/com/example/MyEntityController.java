@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -27,7 +28,7 @@ public class MyEntityController {
 			RedirectAttributes redirectAttrs, Model model) {
 
 		if (result.hasErrors()) {
-			populateForm(model);
+			populateForm(model, myEntity);
 			return "myEntity/create";
 		}
 
@@ -53,11 +54,13 @@ public class MyEntityController {
 	public String createForm(Model model) {
 
 		// Crear una nueva instancia e incluirla en el modelo
-		model.addAttribute(new MyEntity());
+		MyEntity myEntity =new MyEntity();
+		myEntity.setDate(new Date());
+		myEntity.setaDouble(1.8);
 
 		// Incluir en el modelo datos adicionales necesarios en el formulario:
 		// enumerados, etc.
-		populateForm(model);
+		populateForm(model, myEntity);
 
 		// Identificador de la plantilla Thymeleaf que generará la respuesta
 		// HTML
@@ -66,6 +69,8 @@ public class MyEntityController {
 
 	@RequestMapping(value = "/{myEntity}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
 	public String show(@PathVariable MyEntity myEntity, Model model) {
+
+		populateForm(model, myEntity);
 
 		// Return the view to use for rendering the response
 		return "myEntity/show";
@@ -83,7 +88,7 @@ public class MyEntityController {
 			RedirectAttributes redirectAttrs, Model model) {
 
 		if (result.hasErrors()) {
-			populateForm(model);
+			populateForm(model, myEntity);
 			return "myEntity/edit";
 		}
 
@@ -101,7 +106,7 @@ public class MyEntityController {
 
 		// Incluir en el modelo datos adicionales necesarios en el formulario:
 		// enumerados, etc.
-		populateForm(model);
+		populateForm(model, myEntity);
 
 		// Identificador de la plantilla Thymeleaf que generará la respuesta
 		// HTML
@@ -113,7 +118,7 @@ public class MyEntityController {
 
 		// Incluir en el modelo datos adicionales necesarios en el formulario:
 		// enumerados, etc.
-		populateForm(model);
+		populateForm(model, myEntity);
 
 		// Identificador de la plantilla Thymeleaf que generará la respuesta
 		// HTML
@@ -128,7 +133,8 @@ public class MyEntityController {
 		return "redirect:/myEntity";
 	}
 
-	void populateForm(Model model) {
+	void populateForm(Model model,MyEntity myEntity) {
+		model.addAttribute(myEntity);
 	}
 
 }
